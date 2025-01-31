@@ -6,7 +6,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: cypress-io/github-action@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          start: npm start
-          wait-on: 'http://localhost:4000' 
+          node-version: 20
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Start server
+        run: npm run dev &
+      
+      - name: Run tests
+        uses: cypress-io/github-action@v5
+        with:
+          start: npm run dev
+          wait-on: 'http://localhost:4000'
+          browser: chrome 

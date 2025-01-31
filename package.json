@@ -1,0 +1,12 @@
+{
+  "name": "workgen",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "serve _site -p 4000",
+    "test": "cypress run"
+  },
+  "devDependencies": {
+    "cypress": "^13.6.0",
+    "serve": "^14.2.1"
+  }
+} 
