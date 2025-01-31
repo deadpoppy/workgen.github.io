@@ -1,0 +1,10 @@
+# 仅使用GitHub Pages支持的插件
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-redirect-from
+
+# 禁用本地开发插件
+exclude:
+  - vendor
+  - .github 

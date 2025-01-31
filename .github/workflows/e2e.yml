@@ -1,0 +1,12 @@
+name: E2E Tests
+on: [push]
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cypress-io/github-action@v4
+        with:
+          start: npm start
+          wait-on: 'http://localhost:4000' 

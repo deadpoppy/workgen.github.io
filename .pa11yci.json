@@ -1,0 +1,12 @@
+{
+  "defaults": {
+    "timeout": 60000,
+    "concurrency": 3,
+    "standard": "WCAG2AA"
+  },
+  "urls": [
+    "http://localhost:5000",
+    "http://localhost:5000/features/",
+    "http://localhost:5000/install/"
+  ]
+} 
