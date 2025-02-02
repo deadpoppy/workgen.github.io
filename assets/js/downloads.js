@@ -1,5 +1,6 @@
 class DownloadHandler {
   constructor() {
+    console.log('[INIT] 下载处理器初始化');
     try {
       this.initDownloadButtons();
     } catch (error) {
@@ -130,6 +131,14 @@ class DownloadHandler {
     document.body.appendChild(indicator);
     return indicator;
   }
+}
+
+// 添加远程日志记录
+function logToServer(message) {
+  navigator.sendBeacon('/log', JSON.stringify({
+    message,
+    timestamp: Date.now()
+  }));
 }
 
 new DownloadHandler(); 

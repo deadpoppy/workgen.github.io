@@ -12,6 +12,10 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <meta http-equiv="Content-Security-Policy" 
+          content="default-src 'self'; 
+                   img-src 'self' data:;
+                   script-src 'self' 'unsafe-inline';">
 </head>
 <body>
     <div class="particles-bg" id="particles-js"></div>
@@ -19,7 +23,10 @@
     <header class="animate__animated animate__fadeIn">
         <nav>
             <div class="logo">
-                <img src="logo.svg" alt="WorkGen Logo" class="floating">
+                <img src="logo.svg" alt="Logo" class="floating"
+                     loading="lazy" 
+                     decoding="async"
+                     importance="low">
             </div>
             <ul class="nav-links">
                 <li><a href="#features">功能</a></li>
@@ -140,6 +147,8 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
     <script src="main.js"></script>
+    <script src="assets/js/downloads.js" onload="console.log('下载脚本加载成功')" 
+            onerror="console.error('下载脚本加载失败')"></script>
 </body>
 </html>
 
