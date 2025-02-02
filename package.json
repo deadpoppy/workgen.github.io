@@ -2,8 +2,9 @@
   "name": "workgen",
   "version": "1.0.0",
   "scripts": {
-    "dev": "serve _site -l 4000",
-    "test": "cypress run"
+    "dev": "serve ./_site -l 4000 --no-clipboard",
+    "test": "cypress run",
+    "start": "npm run dev"
   },
   "devDependencies": {
     "cypress": "^13.17.0",

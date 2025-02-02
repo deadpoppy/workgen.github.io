@@ -15,6 +15,10 @@ module.exports = defineConfig({
       return config
     },
     defaultCommandTimeout: 30000,
-    responseTimeout: 60000
+    responseTimeout: 60000,
+    retries: {
+      runMode: 2,
+      openMode: 1
+    }
   },
 }); 
