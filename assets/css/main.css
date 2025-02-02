@@ -6,6 +6,8 @@
   --glass-effect: rgba(255, 255, 255, 0.1);
   --cursor-size: 12px;
   --cursor-follow-size: 30px;
+  --section-spacing: 8rem;
+  --card-radius: 16px;
 }
 
 /* 现代导航栏改造 */
@@ -188,4 +190,225 @@
 /* 平滑滚动效果 */
 html {
   scroll-behavior: smooth;
+}
+
+.section {
+  padding: var(--section-spacing) 0;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 4rem;
+  font-size: 2.5rem;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  width: 80px;
+  height: 3px;
+  background: var(--primary-gradient);
+  position: absolute;
+  bottom: -1rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.feature-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.feature-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 20%,
+    rgba(102,126,234,0.1) 50%,
+    transparent 80%
+  );
+  animation: shine 6s infinite linear;
+}
+
+@keyframes shine {
+  to { transform: translate(50%, 50%); }
+}
+
+.tech-tags {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.tech-tags span {
+  background: rgba(255,255,255,0.1);
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.9em;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+}
+
+.feature-icon {
+  width: 60px;
+  height: 60px;
+  background: var(--primary-gradient);
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 1rem;
+}
+
+.feature-icon i {
+  font-size: 2rem;
+  color: white;
+}
+
+.download-platforms {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.platform-card {
+  position: relative;
+  background: rgba(255,255,255,0.1);
+  padding: 2rem;
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  text-align: center;
+}
+
+.platform-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.btn-download {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  justify-content: center;
+}
+
+.team-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.team-member {
+  text-align: center;
+  padding: 1.5rem;
+  background: rgba(255,255,255,0.05);
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+.team-member:hover {
+  transform: translateY(-5px);
+}
+
+.member-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 1rem;
+  position: relative;
+}
+
+.social-links {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0,0,0,0.6);
+  padding: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.team-member:hover .social-links {
+  opacity: 1;
+}
+
+.platform-badge {
+  position: absolute;
+  top: 1rem;
+  right: -1rem;
+  background: #ff4757;
+  color: white;
+  padding: 0.3rem 1.5rem;
+  transform: rotate(15deg);
+  clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+}
+
+.spec-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+  padding: 0.8rem;
+  background: rgba(255,255,255,0.05);
+  border-radius: 8px;
+}
+
+.company-timeline {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.timeline-item {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem 0;
+  position: relative;
+}
+
+.timeline-year {
+  width: 80px;
+  height: 80px;
+  background: var(--primary-gradient);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5em;
+  flex-shrink: 0;
+}
+
+.timeline-content {
+  position: relative;
+  padding: 1.5rem;
+  background: rgba(255,255,255,0.05);
+  border-radius: 12px;
+  flex-grow: 1;
+}
+
+.timeline-content::before {
+  content: '';
+  position: absolute;
+  left: -20px;
+  top: 30px;
+  border: 10px solid transparent;
+  border-right-color: rgba(255,255,255,0.05);
 } 

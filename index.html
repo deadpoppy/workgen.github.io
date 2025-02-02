@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
 </head>
 <body>
     <div class="particles-bg" id="particles-js"></div>
@@ -60,24 +64,150 @@
         </section>
 
         <section id="features" class="section">
-            <h2>核心功能</h2>
+            <h2 class="section-title">核心功能</h2>
             <div class="feature-grid">
-                <!-- 功能卡片 -->
+                <div class="feature-card" data-aos="zoom-in">
+                    <div class="feature-icon pulse">
+                        <i class="ri-cpu-line"></i>
+                    </div>
+                    <h3>智能任务编排</h3>
+                    <p>基于AI的任务优先级自动排序，动态调整工作流程</p>
+                    <div class="tech-tags">
+                        <span>机器学习</span>
+                        <span>自然语言处理</span>
+                    </div>
+                </div>
+                <!-- 更多功能卡片 -->
             </div>
         </section>
 
         <section id="download" class="section">
-            <h2>下载安装</h2>
-            <!-- 下载按钮和说明 -->
+            <h2 class="section-title">下载安装</h2>
+            <div class="download-platforms">
+                <div class="platform-card windows">
+                    <div class="platform-icon">
+                        <i class="ri-windows-fill"></i>
+                    </div>
+                    <h3>Windows</h3>
+                    <div class="version-selector">
+                        <button data-version="x64" class="btn-download">
+                            <i class="ri-download-line"></i>
+                            64位安装包
+                        </button>
+                    </div>
+                </div>
+                <div class="platform-card macos">
+                    <div class="platform-badge">M1/M2 优化</div>
+                    <div class="platform-icon">
+                        <i class="ri-apple-fill"></i>
+                    </div>
+                    <div class="spec-list">
+                        <div class="spec-item">
+                            <i class="ri-chip-line"></i>
+                            Apple Silicon 原生支持
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <section id="about" class="section">
-            <h2>关于我们</h2>
-            <!-- 公司介绍和团队信息 -->
+            <h2 class="section-title">关于我们</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="member1.jpg" alt="技术总监">
+                        <div class="social-links">
+                            <a href="#"><i class="ri-github-fill"></i></a>
+                        </div>
+                    </div>
+                    <h3>张伟</h3>
+                    <p>首席技术官</p>
+                </div>
+                <!-- 更多团队成员 -->
+            </div>
+            <div class="company-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">2020</div>
+                    <div class="timeline-content">
+                        <h4>公司成立</h4>
+                        <p>在上海设立研发中心，专注AI办公自动化</p>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
     <script src="main.js"></script>
 </body>
-</html> 
+</html>
+
+<style>
+.feature-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.feature-card {
+  background: var(--glass-effect);
+  padding: 2rem;
+  border-radius: 16px;
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+}
+
+.feature-icon {
+  width: 60px;
+  height: 60px;
+  background: var(--primary-gradient);
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 1rem;
+}
+
+.download-platforms {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.platform-card {
+  background: rgba(255,255,255,0.1);
+  padding: 2rem;
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+}
+
+.version-selector button {
+  display: block;
+  width: 100%;
+  margin: 0.5rem 0;
+}
+
+.team-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.team-member {
+  text-align: center;
+  padding: 1.5rem;
+  background: rgba(255,255,255,0.05);
+  border-radius: 12px;
+}
+
+.member-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 1rem;
+}
+</style> 

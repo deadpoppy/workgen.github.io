@@ -119,4 +119,25 @@ function addRippleEffect(btn) {
   });
 }
 
-document.querySelectorAll('.btn').forEach(addRippleEffect); 
+document.querySelectorAll('.btn').forEach(addRippleEffect);
+
+// 在现有动画代码中添加
+document.querySelectorAll('.feature-card').forEach(card => {
+  card.addEventListener('mouseenter', () => {
+    anime({
+      targets: card,
+      scale: 1.05,
+      rotateZ: [0, -3],
+      duration: 300
+    });
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = 'translateY(0) scale(1)';
+  });
+});
+
+AOS.init({
+  duration: 1000,
+  once: true,
+  easing: 'ease-in-out-quart'
+}); 
