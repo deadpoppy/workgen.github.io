@@ -1,0 +1,40 @@
+.download-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  width: min(90%, 400px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+.download-option {
+  display: block;
+  padding: 1rem;
+  margin: 0.5rem 0;
+  background: #f8fafc;
+  border-radius: 8px;
+  transition: transform 0.2s;
+}
+
+.download-option:hover {
+  transform: translateY(-2px);
+  background: #f1f5f9;
+}
+
+.file-size {
+  float: right;
+  color: #64748b;
+  font-size: 0.9em;
+} 

@@ -96,4 +96,27 @@ document.querySelectorAll('.animate-section').forEach(section => {
   })
   .setClassToggle(section, 'visible')
   .addTo(animationController);
-}); 
+});
+
+function addRippleEffect(btn) {
+  btn.addEventListener('click', function(e) {
+    const rect = btn.getBoundingClientRect();
+    const ripple = document.createElement('div');
+    
+    ripple.style.cssText = `
+      width: ${rect.width}px;
+      height: ${rect.width}px;
+      left: ${e.clientX - rect.left - rect.width/2}px;
+      top: ${e.clientY - rect.top - rect.width/2}px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 50%;
+      position: absolute;
+      animation: ripple 0.6s ease-out;
+    `;
+
+    btn.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 600);
+  });
+}
+
+document.querySelectorAll('.btn').forEach(addRippleEffect); 
