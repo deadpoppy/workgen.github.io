@@ -4,6 +4,7 @@ on: [push, pull_request]
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
     - uses: actions/checkout@v4
     
@@ -15,21 +16,41 @@ jobs:
     
     - run: npm ci
     - run: npm run build
-    
-    - name: Run Tests
-      run: npm test
+    - run: npm test
 
   e2e-tests:
     needs: build-and-test
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+      
+      - name: Setup Linux Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgbm-dev xvfb
+      
       - uses: actions/setup-node@v3
         with:
           node-version: 20.x
+      
       - run: npm ci
-      - run: npm run dev & npx wait-on http://localhost:4000
-      - run: npm run e2e
+      
+      - name: Start Xvfb
+        uses: GabrielBB/xvfb-action@v1
+        with:
+          run: npm run dev
+      
+      - name: Run Cypress Tests
+        uses: cypress-io/github-action@v6
+        with:
+          start: npm run dev
+          wait-on: 'http://localhost:4000'
+          browser: chrome
+          headless: true
+          config: video=false
+        env:
+          DISPLAY: ':99'
 
   deploy:
     if: github.ref == 'refs/heads/main'
