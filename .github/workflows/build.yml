@@ -6,13 +6,13 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
-    # Ruby环境
+    # 设置Ruby环境
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: 3.0.6
         bundler-cache: true
     
-    # Node.js环境
+    # 设置Node.js环境
     - uses: actions/setup-node@v3
       with:
         node-version: 20.x
@@ -26,12 +26,16 @@ jobs:
     - run: bundle exec jekyll build
     - run: npm run build
     
-    # 测试步骤
+    # 启动服务并测试
     - name: Start server
-      run: npm run dev & 
+      run: nohup npm run dev > server.log 2>&1 &
+    
     - name: Wait for server
-      uses: fountainhead/action-wait-for-check@v1
-      with:
-        url: http://localhost:4000
-        timeout: 120
-    - run: npm run test 
+      run: npx wait-on http://localhost:4000 --timeout 120000
+    
+    - name: Run tests
+      run: npm run test
+    
+    - name: Show server logs
+      if: always()
+      run: cat server.log 
