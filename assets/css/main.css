@@ -415,7 +415,8 @@ html {
 
 .logo img {
   width: clamp(80px, 10vw, 160px);
-  height: auto;
+  height: 1.2em;
+  object-fit: contain;
   image-rendering: -webkit-optimize-contrast;
   transition: transform 0.3s ease;
 }
@@ -423,5 +424,6 @@ html {
 @media (max-width: 768px) {
   .logo img {
     width: 100px;
+    height: 1.5em;
   }
 } 
