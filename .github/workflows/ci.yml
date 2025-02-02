@@ -69,4 +69,22 @@ jobs:
       - uses: actions/upload-pages-artifact@v2
         with:
           path: ./dist
-      - uses: actions/deploy-pages@v2 
+      - uses: actions/deploy-pages@v2
+
+  Optimize Assets:
+    uses: webdevops/image-optimize-action@v2
+    with:
+      jpegQuality: '80'
+      pngQuality: '80'
+      webpQuality: '80'
+
+  Optimize Images:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install ImageMagick
+        run: sudo apt-get install -y imagemagick
+      
+      - name: Optimize Images
+        run: |
+          mogrify -format webp -quality 80 assets/images/*
+          optipng -o7 assets/images/*.png 
