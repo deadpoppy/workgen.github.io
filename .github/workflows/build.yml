@@ -34,17 +34,22 @@ jobs:
       run: |
         nohup npm run dev > server.log 2>&1 &
         echo "SERVER_PID=$!" >> $GITHUB_ENV
+        sleep 10  # 等待服务启动
         grep -o 'http://localhost:[0-9]\+' server.log | cut -d: -f3 > port.txt
+        echo "Detected port: $(cat port.txt)"
     
     - name: Wait for server
       run: |
         PORT=$(cat port.txt)
+        echo "Waiting for port $PORT..."
+        curl --retry 10 --retry-delay 5 --retry-all-errors http://localhost:$PORT
         npx wait-on http://localhost:$PORT --timeout 180000
     
     - name: Run tests
       run: |
         PORT=$(cat port.txt)
-        npm run test -- --baseUrl http://localhost:$PORT
+        echo "Running tests against port $PORT..."
+        npm run test -- --config baseUrl=http://localhost:$PORT
     
     - name: Show server logs
       if: always()

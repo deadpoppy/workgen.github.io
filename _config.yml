@@ -6,6 +6,11 @@ environment: production
 
 # 仅使用GitHub Pages支持的插件
 plugins:
+  - jekyll-coffeescript
+  - jekyll-gist
+  - jekyll-github-metadata
+  - jekyll-paginate
+  - jekyll-relative-links
   - jekyll-seo-tag
   - jekyll-sitemap
   - jekyll-redirect-from
@@ -20,3 +25,5 @@ kramdown:
 exclude:
   - vendor
   - .github 
+
+theme: jekyll-theme-primer 
