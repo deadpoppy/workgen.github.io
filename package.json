@@ -2,7 +2,7 @@
   "name": "workgen",
   "version": "1.0.0",
   "scripts": {
-    "dev": "serve _site -p 4000",
+    "dev": "serve _site -l 4000",
     "test": "cypress run"
   },
   "devDependencies": {
