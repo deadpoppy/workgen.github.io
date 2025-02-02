@@ -1,18 +1,14 @@
 name: Test
-on: [push, pull_request]
+on: [push]
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 3.0
-        bundler-cache: true
-    - name: Build site
-      run: bundle exec jekyll build
-    - name: HTML Validation
-      uses: actions-html-validator@v1
-      with:
-        path: ./_site 
+      - uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - run: npm install
+      - run: npm test 
