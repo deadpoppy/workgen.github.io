@@ -12,6 +12,7 @@
 
 /* 现代导航栏改造 */
 .navbar {
+  font-size: 1.1rem;
   transition: background 0.5s ease;
   background: linear-gradient(
     90deg,
@@ -419,6 +420,7 @@ html {
   object-fit: contain;
   image-rendering: -webkit-optimize-contrast;
   transition: transform 0.3s ease;
+  fill: currentColor;
 }
 
 @media (max-width: 768px) {
