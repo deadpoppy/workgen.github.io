@@ -12,7 +12,7 @@ jobs:
       with:
         ruby-version: '3.0.6'
         bundler-cache: true
-        cache-version: 1
+        cache-version: 2
     
     # 设置Node.js环境
     - name: Setup Node.js
@@ -32,18 +32,21 @@ jobs:
     # 启动服务并测试
     - name: Start server
       run: |
+        echo "Checking _site directory..."
+        ls -la _site
         nohup npm run dev > server.log 2>&1 &
         echo "SERVER_PID=$!" >> $GITHUB_ENV
-        sleep 10  # 等待服务启动
-        grep -o 'http://localhost:[0-9]\+' server.log | cut -d: -f3 > port.txt
-        echo "Detected port: $(cat port.txt)"
+        sleep 20  # 增加等待时间
+        echo "4000" > port.txt  # 硬编码端口
+        echo "Server logs:"
+        cat server.log
     
     - name: Wait for server
       run: |
-        PORT=$(cat port.txt)
+        PORT=4000
         echo "Waiting for port $PORT..."
-        curl --retry 10 --retry-delay 5 --retry-all-errors http://localhost:$PORT
-        npx wait-on http://localhost:$PORT --timeout 180000
+        curl --retry 15 --retry-delay 10 --retry-all-errors -v http://localhost:$PORT
+        npx wait-on http://localhost:$PORT --timeout 300000
     
     - name: Run tests
       run: |
