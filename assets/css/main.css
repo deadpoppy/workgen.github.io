@@ -185,7 +185,7 @@
   align-items: center;
   height: 100%;
   font-size: 1.1rem;
-  line-height: 1.5;
+  line-height: 1.5; /* 实际高度 = 1.1 * 1.5 = 1.65rem ≈ 26.4px */
   transition: all 0.3s ease;
   position: relative;
 }
@@ -437,16 +437,16 @@ html {
 }
 
 .logo img {
-  height: 2rem; /* 32px */
+  height: 1.65rem; /* 精确匹配行高 */
   width: auto;
-  max-height: 80%; /* 保留间距 */
+  max-height: 90%;
   object-fit: contain;
   transition: transform 0.3s ease;
 }
 
 @media (max-width: 768px) {
   .logo img {
-    height: 1.75rem; /* 28px */
+    height: 1.5rem; /* 精确匹配移动端行高 */
   }
   .nav-links {
     font-size: 1rem;
@@ -454,6 +454,6 @@ html {
   }
   .nav-links a {
     font-size: 1rem;
-    line-height: 1.5;
+    line-height: 1.5; /* 1 * 1.5 = 1.5rem = 24px */
   }
 } 
