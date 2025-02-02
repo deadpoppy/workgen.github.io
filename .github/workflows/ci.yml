@@ -87,7 +87,10 @@ jobs:
       - name: Optimize Images
         run: |
           mogrify -format webp -quality 80 assets/images/*
+          mogrify -format webp -quality 85 public/images/*.png
           optipng -o7 assets/images/*.png
 
-  Copy logo.svg:
-    run: cp logo.svg dist/ 
+  Copy Images:
+    run: |
+      mkdir -p dist/images
+      cp public/images/logo.png dist/images/ 
