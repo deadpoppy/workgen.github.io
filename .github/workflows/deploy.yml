@@ -10,9 +10,7 @@ jobs:
       id-token: write
     steps:
       - uses: actions/checkout@v4
-      - run: |
-          mkdir -p public/images
-          cp public/images/logo.png public/images/
+      - run: cp -r public/ public/
       - uses: actions/upload-pages-artifact@v2
         with:
           path: public/

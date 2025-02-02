@@ -411,4 +411,17 @@ html {
   top: 30px;
   border: 10px solid transparent;
   border-right-color: rgba(255,255,255,0.05);
+}
+
+.logo img {
+  width: clamp(80px, 10vw, 160px);
+  height: auto;
+  image-rendering: -webkit-optimize-contrast;
+  transition: transform 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .logo img {
+    width: 100px;
+  }
 } 
