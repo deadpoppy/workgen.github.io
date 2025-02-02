@@ -1,11 +1,19 @@
 class DownloadHandler {
   constructor() {
-    this.initDownloadButtons();
+    try {
+      this.initDownloadButtons();
+    } catch (error) {
+      console.error('[ERROR] 初始化下载按钮失败:', error);
+    }
   }
 
   initDownloadButtons() {
-    document.querySelectorAll('[data-download]').forEach(btn => {
+    const buttons = document.querySelectorAll('[data-download]');
+    console.log('[DEBUG] 找到下载按钮数量:', buttons.length);
+    
+    buttons.forEach(btn => {
       btn.addEventListener('click', (e) => {
+        console.log('[DEBUG] 按钮点击事件触发:', e.target);
         e.preventDefault();
         this.handleDownload(btn.dataset.download);
         this.addRippleEffect(e);
@@ -14,6 +22,7 @@ class DownloadHandler {
   }
 
   handleDownload(platform) {
+    console.log('[DEBUG] 开始处理平台:', platform);
     const urls = {
       windows: {
         '64位安装包': '/downloads/workgen_windows_x64.exe',
@@ -29,6 +38,7 @@ class DownloadHandler {
   }
 
   showPlatformSelector(platform, versions) {
+    console.log('[DEBUG] 显示平台选择器:', Object.keys(versions));
     const modal = document.createElement('div');
     modal.className = 'download-modal';
     modal.innerHTML = `
@@ -82,29 +92,36 @@ class DownloadHandler {
   }
 
   startDownload(url) {
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = true;
-    
-    const progress = this.createProgressIndicator();
-    const xhr = new XMLHttpRequest();
-    
-    xhr.responseType = 'blob';
-    xhr.onprogress = (e) => {
-      if (e.lengthComputable) {
-        const percent = (e.loaded / e.total) * 100;
-        progress.style.width = `${percent}%`;
-      }
-    };
-    
-    xhr.onload = () => {
-      link.href = URL.createObjectURL(xhr.response);
-      link.click();
-      progress.remove();
-    };
-    
-    xhr.open('GET', url);
-    xhr.send();
+    debugger; // 浏览器会在此暂停
+    try {
+      console.log('[DEBUG] 开始下载:', url);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = true;
+      
+      const progress = this.createProgressIndicator();
+      const xhr = new XMLHttpRequest();
+      
+      xhr.responseType = 'blob';
+      xhr.onprogress = (e) => {
+        if (e.lengthComputable) {
+          const percent = (e.loaded / e.total) * 100;
+          progress.style.width = `${percent}%`;
+        }
+      };
+      
+      xhr.onload = () => {
+        link.href = URL.createObjectURL(xhr.response);
+        link.click();
+        progress.remove();
+      };
+      
+      xhr.open('GET', url);
+      xhr.send();
+    } catch (error) {
+      console.error('[ERROR] 下载失败:', error);
+      alert('下载出现异常，请稍后重试');
+    }
   }
 
   createProgressIndicator() {
