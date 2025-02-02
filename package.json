@@ -2,7 +2,7 @@
   "name": "workgen",
   "version": "1.0.0",
   "scripts": {
-    "dev": "serve ./_site -l 4000 --no-clipboard",
+    "dev": "serve ./_site -l 4000 -n --no-clipboard",
     "build": "mkdir -p _site && echo 'Built successfully' > _site/index.html",
     "test": "cypress run",
     "start": "npm run dev"
