@@ -184,6 +184,8 @@
   display: flex;
   align-items: center;
   height: 100%;
+  font-size: 1.1rem;
+  line-height: 1.5;
   transition: all 0.3s ease;
   position: relative;
 }
@@ -435,8 +437,8 @@ html {
 }
 
 .logo img {
-  width: auto; /* 取消固定宽度 */
-  height: 2.2rem; /* 直接使用rem单位 */
+  height: 2rem; /* 32px */
+  width: auto;
   max-height: 80%; /* 保留间距 */
   object-fit: contain;
   transition: transform 0.3s ease;
@@ -444,10 +446,14 @@ html {
 
 @media (max-width: 768px) {
   .logo img {
-    height: 1.8rem; /* 移动端稍小 */
+    height: 1.75rem; /* 28px */
   }
   .nav-links {
     font-size: 1rem;
     gap: 1.5rem;
+  }
+  .nav-links a {
+    font-size: 1rem;
+    line-height: 1.5;
   }
 } 
