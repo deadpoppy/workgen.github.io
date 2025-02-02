@@ -12,6 +12,9 @@
 
 /* 现代导航栏改造 */
 .navbar {
+  display: flex;
+  align-items: center;
+  height: 4rem; /* 固定导航栏高度 */
   font-size: 1.1rem;
   transition: background 0.5s ease;
   background: linear-gradient(
@@ -169,7 +172,18 @@
   animation: ripple 0.6s ease-out;
 }
 
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  font-size: 1.1rem; /* 明确设置文字大小 */
+  height: 100%; /* 与导航栏同高 */
+}
+
 .nav-links a {
+  display: flex;
+  align-items: center;
+  height: 100%;
   transition: all 0.3s ease;
   position: relative;
 }
@@ -414,18 +428,26 @@ html {
   border-right-color: rgba(255,255,255,0.05);
 }
 
+.logo {
+  height: 100%; /* 继承导航栏高度 */
+  display: flex;
+  align-items: center;
+}
+
 .logo img {
-  width: clamp(80px, 10vw, 160px);
-  height: 1.2em;
+  width: auto; /* 取消固定宽度 */
+  height: 2.2rem; /* 直接使用rem单位 */
+  max-height: 80%; /* 保留间距 */
   object-fit: contain;
-  image-rendering: -webkit-optimize-contrast;
   transition: transform 0.3s ease;
-  border: 1px solid red; /* 调试完成后可移除 */
 }
 
 @media (max-width: 768px) {
   .logo img {
-    width: 100px;
-    height: 1.5em;
+    height: 1.8rem; /* 移动端稍小 */
+  }
+  .nav-links {
+    font-size: 1rem;
+    gap: 1.5rem;
   }
 } 
