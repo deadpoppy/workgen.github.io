@@ -438,11 +438,14 @@ html {
 }
 
 .logo img {
-  height: 1.65rem;
-  width: auto;
-  min-width: 100px; /* 新增最小宽度保证可见性 */
-  object-fit: contain;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); /* 增加可视性 */
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  height: auto;
+  width: 100px;
+  min-width: unset;
+  filter: none;
+  background: none;
 }
 
 @media (max-width: 768px) {
