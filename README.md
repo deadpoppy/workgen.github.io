@@ -4,6 +4,10 @@
 
 > 新一代AI增强型应用集成市场，助力提升工作效率与智能协作
 
+<div class="header">
+![Workgen Logo](public/images/logo.png)
+</div>
+
 ## 架构设计理念
 ### 1. 分层解耦架构
 采用"南北向流量+东西向服务"的混合架构模式：
@@ -11,23 +15,37 @@
 ## 核心设计理念
 
 ### 架构全景图
+<div class="architecture-diagram">
 ```mermaid
-graph TD
-    A[开发者] -->|提交| B(应用集成包)
-    B --> C{安全审核}
-    C -->|通过| D[AI能力增强]
-    D --> E[应用商店]
-    E --> F[终端用户]
-    F -->|使用数据| G[智能推荐]
-    G --> E
+%%{init: {'theme': 'forest', 'themeVariables': { 'primaryColor': '#6366f1'}}}%%
+flowchart TD
+    subgraph 开发者端
+    A[开发者门户] -->|提交应用包| B{安全审核}
+    end
     
-    subgraph 核心服务
-    C --> H[静态分析]
-    C --> I[动态沙箱]
-    D --> J[文档生成]
-    D --> K[智能适配]
+    subgraph 平台核心
+    B -->|通过| C[AI增强处理]
+    C --> D[应用商店]
+    D -->|用户数据| E[智能推荐]
+    E --> D
+    end
+    
+    subgraph 安全审核
+    B --> F[静态分析]
+    B --> G[动态沙箱]
+    end
+    
+    subgraph AI增强
+    C --> H[文档生成]
+    C --> I[适配优化]
+    end
+    
+    subgraph 用户端
+    D --> J[企业用户]
+    D --> K[个人开发者]
     end
 ```
+</div>
 
 ## 关键技术决策
 
@@ -54,6 +72,7 @@ graph TD
 ## 安全架构设计
 
 ## 部署架构
+<div class="deployment-flow">
 ```mermaid
 graph TD
     全球接入点[全球接入点 Cloudflare] --> 核心区
@@ -65,6 +84,7 @@ graph TD
     边缘区 --> 法兰克福[法兰克福 数据分析]
     边缘区 --> 新加坡[新加坡 灾备]
 ```
+</div>
 
 ## 当前进展
 ✅ **已实现核心功能**
@@ -138,4 +158,18 @@ npm run dev
 
 # 生产构建
 npm run build
+```
+
+```mermaid
+%%{init: {'theme': 'default', 'themeVariables': { 'edgeLabelBackground':'#fff'}}}%%
+journey
+    title 应用集成流程
+    section 提交应用
+      开发者提交: 5: 开发者
+      安全扫描: 3: CI系统
+      生成报告: 4: 审核系统
+    section 部署上线
+      人工审核: 3: 管理员
+      版本发布: 5: 部署系统
+      监控运行: 4: 运维系统
 ```
