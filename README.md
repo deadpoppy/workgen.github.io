@@ -109,3 +109,33 @@ cd backend && docker-compose up -d
 - 工作流可视化编辑器
 - 跨应用智能编排引擎
 - 企业级SLA保障方案
+
+## CI/CD 工作流
+
+### 三阶段自动化流程
+```mermaid
+graph TD
+    A[代码提交] --> B[构建测试]
+    B --> C[端到端测试]
+    C --> D{生产分支?}
+    D -->|main分支| E[自动部署]
+    D -->|其他分支| F[流程结束]
+```
+
+### 核心优化
+- 统一Node.js 20.x环境
+- 并行化构建流程
+- 智能缓存加速
+- 自动失败重试机制
+
+### 本地调试命令
+```bash
+# 运行完整测试
+npm run test:all
+
+# 启动开发服务器
+npm run dev
+
+# 生产构建
+npm run build
+```
