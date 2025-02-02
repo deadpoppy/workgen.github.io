@@ -17,13 +17,23 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.0
+          ruby-version: 3.0.6
           bundler-cache: true
+          bundler-args: "--without development"
+
+      - name: Cache gems
+        uses: actions/cache@v3
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
 
       - name: Build site
         run: |
           bundle exec jekyll build --trace
           touch _site/.nojekyll
+          echo "Build time: $(date)" >> _site/build-info.txt
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
