@@ -431,17 +431,18 @@ html {
 }
 
 .logo {
+  background: rgba(255,0,0,0.1); /* 临时背景帮助定位 */
   height: 100%; /* 继承导航栏高度 */
   display: flex;
   align-items: center;
 }
 
 .logo img {
-  height: 1.65rem; /* 精确匹配行高 */
+  height: 1.65rem;
   width: auto;
-  max-height: 90%;
+  min-width: 100px; /* 新增最小宽度保证可见性 */
   object-fit: contain;
-  transition: transform 0.3s ease;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); /* 增加可视性 */
 }
 
 @media (max-width: 768px) {
