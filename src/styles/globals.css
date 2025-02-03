@@ -34,4 +34,15 @@ img:not([data-loaded]) {
 
 img[data-loaded] {
   @apply opacity-100;
+}
+
+/* 添加图片悬停说明样式 */
+.hover-image-container:hover .image-caption {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.image-caption {
+  @apply absolute bottom-0 left-0 right-0 bg-black/60 text-white p-4 
+         opacity-0 transition-all duration-300 transform translate-y-full;
 } 

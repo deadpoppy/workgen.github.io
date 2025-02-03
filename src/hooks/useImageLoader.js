@@ -5,7 +5,7 @@ export default function useImageLoader(src) {
     const img = new Image();
     img.src = src;
     img.onload = () => {
-      const elements = document.querySelectorAll(`img[src="${src}"]`);
+      const elements = document.querySelectorAll(`img[src*="${src.split('/').pop()}"]`);
       elements.forEach(el => el.setAttribute('data-loaded', 'true'));
     };
   }, [src]);
