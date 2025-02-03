@@ -3,33 +3,106 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Workgen 应用集成平台</title>
+  <title>WorkGen - 智能任务管理平台</title>
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
 </head>
 <body>
   <div id="app">
     <nav class="nav-bar">
-      <img src="/logo.svg" alt="Workgen" class="logo" width="120">
+      <img src="/logo.svg" alt="WorkGen" class="logo" width="120">
       <div class="nav-links">
         <a href="#features" class="nav-link">核心功能</a>
         <a href="#architecture" class="nav-link">系统架构</a>
-        <a href="#docs" class="nav-link">开发文档</a>
+        <a href="#tech-stack" class="nav-link">技术栈</a>
       </div>
     </nav>
     
     <main class="container">
-      <section class="section">
-        <h2 class="section-title">核心优势</h2>
+      <section class="section" id="features">
+        <h2 class="section-title">核心功能</h2>
         <div class="grid-container">
           <div class="card">
             <h3 class="card-title">
               <svg class="card-icon" ...></svg>
-              智能集成
+              智能任务管理
             </h3>
-            <p>AI驱动的自动化应用编排...</p>
+            <p>AI驱动的任务管理系统，支持智能分类和优先级排序</p>
           </div>
-          <!-- 更多卡片 -->
+          <div class="card">
+            <h3 class="card-title">
+              <svg class="card-icon" ...></svg>
+              工作流自动化
+            </h3>
+            <p>自动化工作流引擎，实现任务的高效流转和执行</p>
+          </div>
+          <div class="card">
+            <h3 class="card-title">
+              <svg class="card-icon" ...></svg>
+              智能提醒
+            </h3>
+            <p>基于AI的智能提醒系统，确保关键任务及时完成</p>
+          </div>
+          <div class="card">
+            <h3 class="card-title">
+              <svg class="card-icon" ...></svg>
+              数据分析
+            </h3>
+            <p>实时任务数据分析，提供工作效率洞察</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="analytics">
+        <h2 class="section-title">实时数据</h2>
+        <div class="grid-container">
+          <div class="metric-card">
+            <div class="metric-icon">📊</div>
+            <div class="metric-content">
+              <h3>任务处理量</h3>
+              <p class="metric-value">1.2M <span class="metric-trend up">+12%</span></p>
+            </div>
+          </div>
+          <!-- 更多统计卡片 -->
+        </div>
+      </section>
+
+      <section class="section" id="architecture">
+        <h2 class="section-title">系统架构</h2>
+        <div class="architecture-diagram">
+          <div class="mermaid">
+            graph TD
+              A[用户界面] --> B[业务逻辑层]
+              B --> C[数据处理层]
+              C --> D[AI引擎]
+              D --> E[数据存储]
+          </div>
+        </div>
+        <div class="deployment-flow">
+          <h3>架构说明</h3>
+          <p>采用微服务架构，结合AI引擎和自动化工作流，实现高效的任务管理...</p>
+        </div>
+      </section>
+
+      <section class="section" id="tech-stack">
+        <h2 class="section-title">技术栈</h2>
+        <div class="grid-container">
+          <div class="card">
+            <h3 class="card-title">AI引擎</h3>
+            <p>基于机器学习的智能任务处理核心</p>
+          </div>
+          <div class="card">
+            <h3 class="card-title">微服务架构</h3>
+            <p>模块化设计，支持灵活扩展</p>
+          </div>
+          <div class="card">
+            <h3 class="card-title">实时数据处理</h3>
+            <p>高效处理海量任务数据</p>
+          </div>
+          <div class="card">
+            <h3 class="card-title">自动化工作流</h3>
+            <p>智能化的任务流转和执行引擎</p>
+          </div>
         </div>
       </section>
     </main>

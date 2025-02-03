@@ -1,0 +1,39 @@
+.data-chart {
+  background: white;
+  padding: 2rem;
+  border-radius: var(--radius-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.chart-progress {
+  height: 6px;
+  background: var(--gray-100);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.chart-progress-bar {
+  height: 100%;
+  background: var(--gradient);
+  transition: width 1s ease;
+}
+
+.metric-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: var(--gray-100);
+  font-size: 0.9rem;
+}
+
+.metric-badge.up {
+  color: var(--success);
+  background: rgba(16, 185, 129, 0.1);
+}
+
+.metric-badge.down {
+  color: var(--error);
+  background: rgba(239, 68, 68, 0.1);
+} 

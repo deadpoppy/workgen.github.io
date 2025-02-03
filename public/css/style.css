@@ -51,10 +51,24 @@ body {
   padding: 0.5rem 1rem;
   border-radius: var(--radius-sm);
   transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-.nav-link:hover {
-  background: rgba(255,255,255,0.1);
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: white;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
 }
 
 .architecture-diagram {
@@ -73,12 +87,10 @@ body {
 
 /* Mermaid图表增强 */
 .mermaid {
-  background: rgba(255,255,255,0.9);
-  padding: 1.5rem;
-  border-radius: 1rem;
-  margin: 2rem 0;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-  transition: transform 0.3s ease;
+  background: linear-gradient(145deg, var(--gray-50) 0%, white 100%);
+  border: 1px solid var(--gray-200);
+  padding: 2rem;
+  border-radius: 1.5rem;
 }
 
 .mermaid:hover {
@@ -87,6 +99,11 @@ body {
 
 /* 流程图文字优化 */
 .mermaid .label {
-  font-family: 'Microsoft YaHei', sans-serif;
-  font-size: 14px;
+  font-weight: 500;
+  color: var(--gray-900);
+}
+
+.mermaid .edge-thickness-normal {
+  stroke-width: 2px;
+  stroke: var(--primary-500);
 } 
