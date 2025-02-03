@@ -5,7 +5,9 @@
     "dev": "serve ./_site -l 4000 -n --no-clipboard --host 0.0.0.0 --debug",
     "build": "mkdir -p _site && echo 'Built successfully' > _site/index.html",
     "test": "cypress run",
-    "start": "npm run dev"
+    "start": "npm run dev",
+    "export": "next build && next export",
+    "deploy": "gh-pages -d out"
   },
   "devDependencies": {
     "cypress": "^13.17.0",
