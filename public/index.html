@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WorkGen - 智能任务管理平台</title>
+  <title>ToDoList - iOS任务管理应用</title>
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
 </head>
 <body>
   <div id="app">
     <nav class="nav-bar">
-      <img src="/logo.svg" alt="WorkGen" class="logo" width="120">
+      <img src="/logo.svg" alt="ToDoList" class="logo" width="120">
       <div class="nav-links">
-        <a href="#features" class="nav-link">核心功能</a>
-        <a href="#architecture" class="nav-link">系统架构</a>
+        <a href="#features" class="nav-link">功能特性</a>
+        <a href="#architecture" class="nav-link">技术架构</a>
         <a href="#tech-stack" class="nav-link">技术栈</a>
       </div>
     </nav>
@@ -24,46 +24,83 @@
         <div class="grid-container">
           <div class="card">
             <h3 class="card-title">
-              <svg class="card-icon" ...></svg>
-              智能任务管理
+              <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M12 4v16m8-8H4" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+              任务管理
             </h3>
-            <p>AI驱动的任务管理系统，支持智能分类和优先级排序</p>
+            <p>创建、编辑和管理待办任务，支持拖拽排序和状态标记</p>
           </div>
           <div class="card">
             <h3 class="card-title">
-              <svg class="card-icon" ...></svg>
-              工作流自动化
+              <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+              提醒通知
             </h3>
-            <p>自动化工作流引擎，实现任务的高效流转和执行</p>
+            <p>灵活设置提醒时间，支持重复提醒，不错过重要任务</p>
           </div>
           <div class="card">
             <h3 class="card-title">
-              <svg class="card-icon" ...></svg>
-              智能提醒
+              <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+              主题定制
             </h3>
-            <p>基于AI的智能提醒系统，确保关键任务及时完成</p>
+            <p>支持浅色/深色主题，自动适应系统设置，提供舒适体验</p>
           </div>
           <div class="card">
             <h3 class="card-title">
-              <svg class="card-icon" ...></svg>
-              数据分析
+              <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+              数据同步
             </h3>
-            <p>实时任务数据分析，提供工作效率洞察</p>
+            <p>本地数据持久化存储，确保任务数据安全可靠</p>
           </div>
         </div>
       </section>
 
-      <section class="section" id="analytics">
-        <h2 class="section-title">实时数据</h2>
+      <section class="section" id="features-highlight">
+        <h2 class="section-title">特色功能</h2>
         <div class="grid-container">
           <div class="metric-card">
             <div class="metric-icon">📊</div>
             <div class="metric-content">
-              <h3>任务处理量</h3>
-              <p class="metric-value">1.2M <span class="metric-trend up">+12%</span></p>
+              <h3>数据报表</h3>
+              <p>自动生成日报周报，数据分析一目了然</p>
             </div>
           </div>
-          <!-- 更多统计卡片 -->
+          <div class="metric-card">
+            <div class="metric-icon">🤖</div>
+            <div class="metric-content">
+              <h3>智能代办</h3>
+              <p>智能分类和优先级排序，高效处理任务</p>
+            </div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon">📈</div>
+            <div class="metric-content">
+              <h3>数据统计</h3>
+              <p>直观的数据统计和分析，助您提升效率</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="preview">
+        <h2 class="section-title">界面预览</h2>
+        <div class="preview-grid">
+          <img src="/preview/dashboard.png" alt="仪表盘" class="preview-image" 
+               title="直观的任务仪表盘，一目了然的任务概览">
+          <img src="/preview/智能代办.jpg" alt="智能待办" class="preview-image"
+               title="智能待办列表，轻松管理日常任务">
+          <img src="/preview/智能统计.jpg" alt="数据统计" class="preview-image"
+               title="任务完成情况统计，助您提升工作效率">
+        </div>
+        <div class="preview-caption">
+          <h3>现代化界面设计</h3>
+          <p>简洁直观的界面布局，清晰的数据可视化，让任务管理更轻松</p>
         </div>
       </section>
 
@@ -72,15 +109,15 @@
         <div class="architecture-diagram">
           <div class="mermaid">
             graph TD
-              A[用户界面] --> B[业务逻辑层]
-              B --> C[数据处理层]
-              C --> D[AI引擎]
-              D --> E[数据存储]
+              A[视图层/SwiftUI] --> B[视图模型层/MVVM]
+              B --> C[模型层]
+              C --> D[数据层/CoreData]
+              B --> E[工具层]
           </div>
         </div>
         <div class="deployment-flow">
           <h3>架构说明</h3>
-          <p>采用微服务架构，结合AI引擎和自动化工作流，实现高效的任务管理...</p>
+          <p>采用MVVM架构模式，结合SwiftUI声明式UI和CoreData数据持久化，实现高效的任务管理系统</p>
         </div>
       </section>
 
@@ -88,20 +125,20 @@
         <h2 class="section-title">技术栈</h2>
         <div class="grid-container">
           <div class="card">
-            <h3 class="card-title">AI引擎</h3>
-            <p>基于机器学习的智能任务处理核心</p>
+            <h3 class="card-title">SwiftUI</h3>
+            <p>现代声明式UI框架，构建响应式界面</p>
           </div>
           <div class="card">
-            <h3 class="card-title">微服务架构</h3>
-            <p>模块化设计，支持灵活扩展</p>
+            <h3 class="card-title">CoreData</h3>
+            <p>强大的数据持久化解决方案</p>
           </div>
           <div class="card">
-            <h3 class="card-title">实时数据处理</h3>
-            <p>高效处理海量任务数据</p>
+            <h3 class="card-title">Combine</h3>
+            <p>响应式编程框架，处理数据流</p>
           </div>
           <div class="card">
-            <h3 class="card-title">自动化工作流</h3>
-            <p>智能化的任务流转和执行引擎</p>
+            <h3 class="card-title">UserNotifications</h3>
+            <p>本地通知框架，实现任务提醒</p>
           </div>
         </div>
       </section>
