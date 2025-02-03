@@ -1,9 +1,10 @@
 :root {
   /* 主色系扩展 */
-  --primary-400: #64d2ff;
-  --primary-500: #0a84ff;
-  --primary-600: #0066cc;
-  --primary-700: #004799;
+  --primary-400: #60a5fa;
+  --primary-500: #3b82f6;
+  --primary-600: #2563eb;
+  --primary-700: #1d4ed8;
+  --primary-800: #1e40af;
   --gradient: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-700) 100%);
   
   /* 中性色扩展 */
@@ -29,14 +30,60 @@
   /* 新增科技感辅助色 */
   --tech-blue: #60a5fa;
   --ai-purple: #8b5cf6;
+  
+  /* 新增灰度色 */
+  --gray-400: #94a3b8;
+  --gray-500: #64748b;
+  --gray-600: #475569;
+  --gray-700: #334155;
+  
+  /* 新增阴影 */
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+  
+  /* 新增圆角 */
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  
+  /* 新增渐变 */
+  --gradient-blue: linear-gradient(135deg, var(--primary-400) 0%, var(--primary-600) 100%);
+  --gradient-dark: linear-gradient(135deg, var(--gray-700) 0%, var(--gray-900) 100%);
+  
+  /* 添加RGB值用于透明度计算 */
+  --primary-500-rgb: 59, 130, 246;
+  
+  /* 新增暗色主题颜色 */
+  --dark-bg: #0f172a;
+  --dark-card: #1e293b;
+  --dark-border: #334155;
+  --dark-text: #e2e8f0;
+  
+  /* 新增阴影变量 */
+  --shadow-xl-dark: 0 20px 25px -5px rgba(0,0,0,0.3), 0 10px 10px -5px rgba(0,0,0,0.2);
+  
+  /* 添加过渡效果 */
+  --theme-transition: background-color 0.3s ease,
+                     color 0.3s ease,
+                     border-color 0.3s ease,
+                     box-shadow 0.3s ease;
+}
+
+body,
+.card,
+.tech-card,
+.feature-card,
+.showcase-item {
+  transition: var(--theme-transition);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --gray-50: #0f172a;
     --gray-100: #1e293b;
-    --gray-800: #f1f5f9;
-    --gray-900: #ffffff;
+    --gray-200: #334155;
+    --gray-700: #cbd5e1;
+    --gray-800: #e2e8f0;
+    --gray-900: #f8fafc;
     
     .card {
       background: var(--gray-50);
@@ -46,5 +93,19 @@
     .mermaid {
       background: var(--gray-100);
     }
+    
+    /* 暗色主题下的阴影 */
+    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.2);
+    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.2);
+    
+    /* 暗色主题下的渐变 */
+    --gradient: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-800) 100%);
   }
+}
+
+/* 暗色主题下的阴影调整 */
+.dark-theme {
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.3);
+  --shadow-xl: var(--shadow-xl-dark);
 } 
