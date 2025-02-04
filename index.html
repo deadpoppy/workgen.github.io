@@ -373,11 +373,12 @@
             
             <div class="hero-image animate__animated animate__fadeInRight">
                 <div class="floating-dashboard">
-                    <img src="./assets/images/dashboard.png" 
-                         alt="WorkGen Dashboard"
-                         style="max-width: 600px; width: 100%"
+                    <img src="dashboard.png" 
+                         alt="WorkGen 仪表盘界面"
+                         class="dashboard-preview"
                          loading="lazy"
-                         onerror="this.onerror=null;this.src='./assets/images/fallback.png'">
+                         data-fallback="./assets/images/fallback.png"
+                         onerror="this.onerror=null;this.src=this.dataset.fallback">
                 </div>
             </div>
         </section>

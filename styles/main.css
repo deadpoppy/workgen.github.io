@@ -18,22 +18,33 @@ main {
 }
 
 .hero {
-    min-height: calc(100vh - 80px);
+    min-height: 90vh;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 4rem;
-    padding: 4rem 0;
+    padding: 4rem 2rem;
 }
 
-@media (max-width: 768px) {
+.hero-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 1024px) {
     .hero {
         flex-direction: column;
         text-align: center;
     }
-    
-    .nav-links {
-        display: none; /* 在移动端添加汉堡菜单 */
+
+    .hero-image {
+        margin-top: 2rem;
+    }
+
+    .dashboard-preview {
+        max-width: 100%;
     }
 }
 
@@ -52,4 +63,25 @@ img {
     0% { transform: translateY(0); }
     50% { transform: translateY(-10px); }
     100% { transform: translateY(0); }
+}
+
+/* Dashboard 图片样式 */
+.dashboard-preview {
+    max-width: 600px;
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.floating-dashboard {
+    position: relative;
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
 } 
