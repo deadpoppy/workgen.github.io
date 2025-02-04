@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WorkGen - AI智能工作助手</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/layout.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"></script>
@@ -319,19 +320,27 @@
     <div class="particles-bg" id="particles-js"></div>
     
     <header class="animate__animated animate__fadeIn">
-        <nav>
+        <nav aria-label="主导航">
             <div class="logo">
-                <img src="./assets/images/logo/logo.svg"
+                <img src="/assets/images/logo.svg"
                      alt="WorkGen Logo"
                      class="floating"
                      loading="lazy"
-                     onerror="this.src='./assets/images/logo/logo.png'"
-                     decoding="async">
+                     onerror="this.src='/assets/images/logo-fallback.png'"
+                     width="40"
+                     height="40">
+                <span class="logo-text">WorkGen</span>
             </div>
-            <ul class="nav-links">
-                <li><a href="#features">功能</a></li>
-                <li><a href="#download">下载</a></li>
-                <li><a href="#about">关于</a></li>
+            <ul class="nav-links" role="menubar">
+                <li role="none">
+                    <a href="#features" role="menuitem">功能</a>
+                </li>
+                <li role="none">
+                    <a href="#download" role="menuitem">下载</a>
+                </li>
+                <li role="none">
+                    <a href="#about" role="menuitem">关于</a>
+                </li>
             </ul>
         </nav>
     </header>
