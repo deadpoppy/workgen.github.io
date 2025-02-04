@@ -1,8 +1,10 @@
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import useImageLoader from '../hooks/useImageLoader';
 
 export default function HoverImage({ src, alt }) {
+  const [isHovered, setIsHovered] = useState(false);
   useImageLoader(src);
   
   return (
@@ -11,7 +13,9 @@ export default function HoverImage({ src, alt }) {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
       whileHover={{ scale: 1.03 }}
-      className="relative overflow-hidden rounded-2xl group hover-image-container"
+      className={`relative overflow-hidden rounded-2xl group hover-image-container ${isHovered ? 'hovered' : ''}`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       <Image
         src={src}
@@ -20,9 +24,10 @@ export default function HoverImage({ src, alt }) {
         height={400}
         className="w-full h-64 object-cover"
         placeholder="blur"
-        blurDataURL="/preview/placeholder.jpg"
+        blurDataURL="../../assets/images/preview/placeholder.jpg"
         onError={(e) => {
-          e.target.src = '/images/fallback.jpg';
+          console.error(`图片加载失败: ${src}`);
+          e.target.src = '../../assets/images/fallback.png';
         }}
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

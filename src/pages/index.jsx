@@ -1,3 +1,6 @@
+import React from 'react';
+import HeroSection from '../components/HeroSection';
+import FeatureGrid from '../components/FeatureGrid';
 import ImageGallery from '../components/ImageGallery';
 import Layout from '../components/Layout';
 import { validatePreviewImages } from '../utils/validateImages';
@@ -12,17 +15,18 @@ const previewImages = [
   { src: '/preview/自动化日报生成.jpg', alt: '自动化日报生成' }
 ];
 
-export default function Home() {
+export default function HomePage() {
   useEffect(() => {
     validatePreviewImages();
   }, []);
 
   return (
     <Layout>
-      <section className="container mx-auto py-12">
-        <h2 className="text-3xl font-bold mb-8">项目预览</h2>
+      <div className="homepage">
+        <HeroSection />
+        <FeatureGrid />
         <ImageGallery images={previewImages} />
-      </section>
+      </div>
       <div className="fixed bottom-4 right-4 p-2 bg-black/50 text-xs text-white rounded">
         Debug信息：
         <div>粒子系统：已加载</div>

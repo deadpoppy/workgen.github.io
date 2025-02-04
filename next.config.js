@@ -4,6 +4,9 @@ module.exports = {
   output: 'export',
   assetPrefix: isProd ? '/your-repo-name/' : '', // 替换为你的仓库名
   images: {
-    unoptimized: true // 禁用图片优化以兼容静态导出
+    unoptimized: true, // 禁用图片优化以兼容静态导出
+    domains: ['localhost'],
+    loader: 'default',
+    path: '/_next/image',
   }
 } 

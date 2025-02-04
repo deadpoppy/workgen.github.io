@@ -14,8 +14,234 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <meta http-equiv="Content-Security-Policy" 
           content="default-src 'self'; 
-                   img-src 'self' data:;
-                   script-src 'self' 'unsafe-inline';">
+                   img-src 'self' data: https: http:;
+                   script-src 'self' 'unsafe-inline' https: http:;
+                   style-src 'self' 'unsafe-inline' https: http:;
+                   font-src 'self' https: data:;">
+    <script>
+    window.addEventListener('load', function() {
+        const images = document.querySelectorAll('img');
+        images.forEach(img => {
+            if (!img.complete || img.naturalHeight === 0) {
+                img.src = 'images/fallback.png';
+            }
+        });
+    });
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4F46E5;
+            --gradient-start: #4F46E5;
+            --gradient-end: #7C3AED;
+            --bg-dark: #0F172A;
+            --text-light: #F8FAFC;
+            --card-bg: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%);
+            backdrop-filter: blur(20px);
+            padding: 4rem 0;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            margin-right: 4rem;
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3);
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 4rem 2rem;
+        }
+
+        .gallery-grid img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .gallery-grid img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .floating-dashboard {
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .testimonial-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 2rem 0;
+        }
+
+        .testimonial-card blockquote {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin: 1rem 0;
+        }
+
+        nav {
+            backdrop-filter: blur(10px);
+            background: rgba(15, 23, 42, 0.8);
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            width: auto;
+            margin-right: 1rem;
+        }
+        
+        /* 添加浮动动画效果 */
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+        
+        /* 导航栏布局优化 */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 粒子背景样式 */
+        .particles-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #1E293B 100%);
+        }
+        
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        /* 确保内容在粒子上层 */
+        main {
+            position: relative;
+            z-index: 1;
+        }
+    </style>
 </head>
 <body>
     <div class="particles-bg" id="particles-js"></div>
@@ -23,9 +249,11 @@
     <header class="animate__animated animate__fadeIn">
         <nav>
             <div class="logo">
-                <img src="/images/logo.svg" alt="WorkGen Logo"
+                <img src="./assets/images/logo/logo.svg"
+                     alt="WorkGen Logo"
                      class="floating"
                      loading="lazy"
+                     onerror="this.src='./assets/images/logo/logo.png'"
                      decoding="async">
             </div>
             <ul class="nav-links">
@@ -207,10 +435,22 @@
         <section class="image-gallery">
             <h2 class="section-title">功能预览</h2>
             <div class="gallery-grid">
-                <img src="/preview/日报列表.jpg" alt="日报列表" loading="lazy">
-                <img src="/preview/智能代办.jpg" alt="智能待办" loading="lazy">
-                <img src="/preview/智能统计.jpg" alt="数据统计" loading="lazy">
-                <img src="/preview/自动化日报生成.jpg" alt="日报生成" loading="lazy">
+                <img src="./assets/images/preview/report-list.jpg" 
+                     alt="日报列表" 
+                     loading="lazy"
+                     onerror="this.src='./assets/images/fallback.png'">
+                <img src="./assets/images/preview/smart-todo.jpg" 
+                     alt="智能待办" 
+                     loading="lazy"
+                     onerror="this.src='./assets/images/fallback.png'">
+                <img src="./assets/images/preview/statistics.jpg" 
+                     alt="数据统计" 
+                     loading="lazy"
+                     onerror="this.src='./assets/images/fallback.png'">
+                <img src="./assets/images/preview/automation-report-generation.jpg" 
+                     alt="日报生成" 
+                     loading="lazy"
+                     onerror="this.src='./assets/images/fallback.png'">
             </div>
         </section>
     </main>
@@ -219,6 +459,110 @@
     <script src="main.js"></script>
     <script src="assets/js/downloads.js" onload="console.log('下载脚本加载成功')" 
             onerror="console.error('下载脚本加载失败')"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // 验证所有图片加载
+        const images = document.querySelectorAll('img');
+        images.forEach(img => {
+            img.addEventListener('error', function() {
+                console.error(`图片加载失败: ${this.src}`);
+                // 检查是否已经是fallback图片，避免循环
+                if (!this.src.includes('fallback.png')) {
+                    this.src = './assets/images/fallback.png';
+                }
+            });
+            
+            img.addEventListener('load', function() {
+                console.log(`图片加载成功: ${this.src}`);
+            });
+        });
+    });
+    </script>
+
+    <!-- 在最后一个<script>标签前添加粒子配置 -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        particlesJS('particles-js', {
+            particles: {
+                number: {
+                    value: 100,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: ['#4F46E5', '#7C3AED', '#2563EB']  // 使用主题相关的颜色
+                },
+                shape: {
+                    type: "circle"
+                },
+                opacity: {
+                    value: 0.6,
+                    random: true,
+                    animation: {
+                        enable: true,
+                        speed: 1,
+                        opacity_min: 0.1,
+                        sync: false
+                    }
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                    animation: {
+                        enable: true,
+                        speed: 2,
+                        size_min: 0.1,
+                        sync: false
+                    }
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#4F46E5",
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: "none",
+                    random: false,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false,
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: "grab"
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: "push"
+                    },
+                    resize: true
+                },
+                modes: {
+                    grab: {
+                        distance: 140,
+                        line_linked: {
+                            opacity: 1
+                        }
+                    },
+                    push: {
+                        particles_nb: 4
+                    }
+                }
+            },
+            retina_detect: true
+        });
+    });
+    </script>
 </body>
 </html>
 
@@ -288,5 +632,24 @@
   border-radius: 50%;
   overflow: hidden;
   margin: 0 auto 1rem;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.gallery-grid img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.gallery-grid img:hover {
+    transform: scale(1.05);
 }
 </style> 
