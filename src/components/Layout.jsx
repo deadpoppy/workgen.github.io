@@ -1,9 +1,16 @@
+import Header from './Header';
+import Footer from './Footer';
+import ThemeToggle from './ThemeToggle';
+
 export default function Layout({ children }) {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-indigo-900 relative overflow-hidden">
-      <div className="container mx-auto px-4 py-16 relative z-10">
+    <div className="min-h-screen flex flex-col">
+      <Header />
+      <main className="flex-1 container mx-auto px-4 py-8">
         {children}
-      </div>
+      </main>
+      <Footer />
+      <ThemeToggle className="fixed bottom-4 right-4" />
     </div>
   );
 } 

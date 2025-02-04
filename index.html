@@ -279,7 +279,7 @@
             height: 100%;
             top: 0;
             left: 0;
-            z-index: -1;
+            z-index: 1;
             pointer-events: none;
         }
         
@@ -399,6 +399,41 @@
                 transform: none;
             }
         }
+
+        /* 添加基础容器样式 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* 修复英雄区布局 */
+        .hero {
+            position: relative;
+            z-index: 2;
+            min-height: auto; /* 改为自动高度 */
+            padding: 8rem 0 4rem; /* 增加顶部间距避开导航栏 */
+        }
+
+        /* 调整粒子容器层级 */
+        #particles-js {
+            z-index: 1; /* 原为-1 */
+        }
+
+        /* 修复特征卡片布局 */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        /* 添加图片加载保障 */
+        .dashboard-preview {
+            min-height: 400px;
+            background: var(--card-bg);
+            border-radius: 16px;
+        }
     </style>
 </head>
 <body>
@@ -431,233 +466,235 @@
     </header>
 
     <main>
-        <section class="hero">
-            <div class="hero-content animate__animated animate__fadeInUp">
-                <h1 class="gradient-text">WorkGen</h1>
-                <h2>智能任务管理 × AI自动生成报告</h2>
-                <p class="typewriter">通过AI技术自动分析任务记录，智能生成日报/周报，提升工作效率300%</p>
+        <div class="container">
+            <section class="hero">
+                <div class="hero-content animate__animated animate__fadeInUp">
+                    <h1 class="gradient-text">WorkGen</h1>
+                    <h2>智能任务管理 × AI自动生成报告</h2>
+                    <p class="typewriter">通过AI技术自动分析任务记录，智能生成日报/周报，提升工作效率300%</p>
+                    
+                    <div class="cta-buttons">
+                        <a href="#" 
+                           class="btn btn-primary" 
+                           data-download="windows"
+                           onclick="event.preventDefault()">
+                            下载Windows版
+                        </a>
+                        <a href="#" 
+                           class="btn btn-secondary" 
+                           data-download="macos"
+                           onclick="event.preventDefault()">
+                            下载macOS版
+                        </a>
+                        <a href="#" class="btn btn-outline">
+                            在线体验
+                        </a>
+                    </div>
+                </div>
                 
-                <div class="cta-buttons">
-                    <a href="#" 
-                       class="btn btn-primary" 
-                       data-download="windows"
-                       onclick="event.preventDefault()">
-                        下载Windows版
-                    </a>
-                    <a href="#" 
-                       class="btn btn-secondary" 
-                       data-download="macos"
-                       onclick="event.preventDefault()">
-                        下载macOS版
-                    </a>
-                    <a href="#" class="btn btn-outline">
-                        在线体验
-                    </a>
+                <div class="hero-image animate__animated animate__fadeInRight">
+                    <div class="floating-dashboard">
+                        <img src="dashboard.png" 
+                             alt="WorkGen 仪表盘界面"
+                             class="dashboard-preview"
+                             loading="lazy"
+                             data-fallback="./assets/images/fallback.png"
+                             onerror="this.onerror=null;this.src=this.dataset.fallback">
+                    </div>
                 </div>
-            </div>
-            
-            <div class="hero-image animate__animated animate__fadeInRight">
-                <div class="floating-dashboard">
-                    <img src="dashboard.png" 
-                         alt="WorkGen 仪表盘界面"
-                         class="dashboard-preview"
+            </section>
+
+            <section class="features">
+                <div class="feature-grid">
+                    <!-- 核心优势 -->
+                    <div class="feature-card" data-aos="fade-up">
+                        <div class="feature-icon">
+                            <i class="ri-artificial-intelligence-line"></i>
+                        </div>
+                        <h3>智能工作流引擎</h3>
+                        <p>基于深度学习的任务优先级排序，自动优化工作流程</p>
+                        <ul class="feature-list">
+                            <li>智能日报生成</li>
+                            <li>会议纪要自动整理</li>
+                            <li>项目进度预测</li>
+                        </ul>
+                    </div>
+
+                    <!-- 技术架构 -->
+                    <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="feature-icon">
+                            <i class="ri-cloud-line"></i>
+                        </div>
+                        <h3>混合云架构</h3>
+                        <p>安全可靠的分布式系统设计</p>
+                        <div class="architecture-diagram">
+                            <div class="layer">AI处理层</div>
+                            <div class="layer">分布式存储</div>
+                            <div class="layer">安全加密</div>
+                        </div>
+                    </div>
+
+                    <!-- 添加更多预览图片 -->
+                    <div class="feature-card" data-aos="fade-up">
+                        <div class="feature-icon">
+                            <i class="ri-artificial-intelligence-line"></i>
+                        </div>
+                        <h3>智能报告生成</h3>
+                        <p>自动生成可视化工作报告</p>
+                        <img src="/preview/AI周报总结.jpg" alt="周报示例" class="feature-preview">
+                    </div>
+                </div>
+            </section>
+
+            <section id="features" class="section">
+                <h2 class="section-title">核心功能</h2>
+                <div class="feature-grid">
+                    <div class="feature-card" data-aos="zoom-in">
+                        <div class="feature-icon pulse">
+                            <i class="ri-cpu-line"></i>
+                        </div>
+                        <h3>智能任务编排</h3>
+                        <p>基于AI的任务优先级自动排序，动态调整工作流程</p>
+                        <div class="tech-tags">
+                            <span>机器学习</span>
+                            <span>自然语言处理</span>
+                        </div>
+                    </div>
+
+                    <div class="feature-card" data-aos="zoom-in">
+                        <div class="feature-icon pulse">
+                            <i class="ri-file-chart-line"></i>
+                        </div>
+                        <h3>智能报告生成</h3>
+                        <p>自动分析工作数据，生成可视化日报/周报</p>
+                        <div class="tech-tags">
+                            <span>NLP处理</span>
+                            <span>数据可视化</span>
+                        </div>
+                    </div>
+
+                    <div class="feature-card" data-aos="zoom-in">
+                        <div class="feature-icon pulse">
+                            <i class="ri-cloud-line"></i>
+                        </div>
+                        <h3>云端同步</h3>
+                        <p>多端实时同步，支持离线工作模式</p>
+                        <div class="tech-tags">
+                            <span>分布式存储</span>
+                            <span>端到端加密</span>
+                        </div>
+                    </div>
+
+                    <div class="feature-card" data-aos="zoom-in">
+                        <div class="feature-icon pulse">
+                            <i class="ri-team-line"></i>
+                        </div>
+                        <h3>团队协作</h3>
+                        <p>实时任务分配与进度跟踪</p>
+                        <div class="tech-tags">
+                            <span>协同编辑</span>
+                            <span>权限管理</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="download" class="section">
+                <h2 class="section-title">下载安装</h2>
+                <div class="download-platforms">
+                    <div class="platform-card windows">
+                        <div class="platform-icon">
+                            <i class="ri-windows-fill"></i>
+                        </div>
+                        <h3>Windows</h3>
+                        <div class="version-selector">
+                            <button data-version="x64" class="btn-download">
+                                <i class="ri-download-line"></i>
+                                64位安装包
+                            </button>
+                        </div>
+                    </div>
+                    <div class="platform-card macos">
+                        <div class="platform-badge">M1/M2 优化</div>
+                        <div class="platform-icon">
+                            <i class="ri-apple-fill"></i>
+                        </div>
+                        <div class="spec-list">
+                            <div class="spec-item">
+                                <i class="ri-chip-line"></i>
+                                Apple Silicon 原生支持
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="about" class="section">
+                <h2 class="section-title">关于我们</h2>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="/preview/member1.jpg" alt="技术总监">
+                            <div class="social-links">
+                                <a href="#"><i class="ri-github-fill"></i></a>
+                            </div>
+                        </div>
+                        <h3>张伟</h3>
+                        <p>首席技术官</p>
+                    </div>
+                    <!-- 更多团队成员 -->
+                </div>
+                <div class="company-timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-year">2020</div>
+                        <div class="timeline-content">
+                            <h4>公司成立</h4>
+                            <p>在上海设立研发中心，专注AI办公自动化</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 用户评价 -->
+            <section class="testimonials">
+                <h2 class="section-title">用户评价</h2>
+                <div class="testimonial-carousel">
+                    <div class="testimonial-card">
+                        <div class="user-avatar"></div>
+                        <blockquote>
+                            "使用WorkGen后，每周节省至少10小时文书工作时间"
+                        </blockquote>
+                        <div class="user-info">
+                            <h4>张伟</h4>
+                            <p>某科技公司CTO</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 添加图片画廊部分 -->
+            <section class="image-gallery">
+                <h2 class="section-title">功能预览</h2>
+                <div class="gallery-grid">
+                    <img src="./assets/images/preview/report-list.jpg" 
+                         alt="日报列表" 
                          loading="lazy"
-                         data-fallback="./assets/images/fallback.png"
-                         onerror="this.onerror=null;this.src=this.dataset.fallback">
+                         onerror="this.onerror=null;this.src='./assets/images/fallback.png'">
+                    <img src="./assets/images/preview/smart-todo.jpg" 
+                         alt="智能待办" 
+                         loading="lazy"
+                         onerror="this.src='./assets/images/fallback.png'">
+                    <img src="./assets/images/preview/statistics.jpg" 
+                         alt="数据统计" 
+                         loading="lazy"
+                         onerror="this.src='./assets/images/fallback.png'">
+                    <img src="./assets/images/preview/automation-report-generation.jpg" 
+                         alt="日报生成" 
+                         loading="lazy"
+                         onerror="this.src='./assets/images/fallback.png'">
                 </div>
-            </div>
-        </section>
-
-        <section class="features">
-            <div class="feature-grid">
-                <!-- 核心优势 -->
-                <div class="feature-card" data-aos="fade-up">
-                    <div class="feature-icon">
-                        <i class="ri-artificial-intelligence-line"></i>
-                    </div>
-                    <h3>智能工作流引擎</h3>
-                    <p>基于深度学习的任务优先级排序，自动优化工作流程</p>
-                    <ul class="feature-list">
-                        <li>智能日报生成</li>
-                        <li>会议纪要自动整理</li>
-                        <li>项目进度预测</li>
-                    </ul>
-                </div>
-
-                <!-- 技术架构 -->
-                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="feature-icon">
-                        <i class="ri-cloud-line"></i>
-                    </div>
-                    <h3>混合云架构</h3>
-                    <p>安全可靠的分布式系统设计</p>
-                    <div class="architecture-diagram">
-                        <div class="layer">AI处理层</div>
-                        <div class="layer">分布式存储</div>
-                        <div class="layer">安全加密</div>
-                    </div>
-                </div>
-
-                <!-- 添加更多预览图片 -->
-                <div class="feature-card" data-aos="fade-up">
-                    <div class="feature-icon">
-                        <i class="ri-artificial-intelligence-line"></i>
-                    </div>
-                    <h3>智能报告生成</h3>
-                    <p>自动生成可视化工作报告</p>
-                    <img src="/preview/AI周报总结.jpg" alt="周报示例" class="feature-preview">
-                </div>
-            </div>
-        </section>
-
-        <section id="features" class="section">
-            <h2 class="section-title">核心功能</h2>
-            <div class="feature-grid">
-                <div class="feature-card" data-aos="zoom-in">
-                    <div class="feature-icon pulse">
-                        <i class="ri-cpu-line"></i>
-                    </div>
-                    <h3>智能任务编排</h3>
-                    <p>基于AI的任务优先级自动排序，动态调整工作流程</p>
-                    <div class="tech-tags">
-                        <span>机器学习</span>
-                        <span>自然语言处理</span>
-                    </div>
-                </div>
-
-                <div class="feature-card" data-aos="zoom-in">
-                    <div class="feature-icon pulse">
-                        <i class="ri-file-chart-line"></i>
-                    </div>
-                    <h3>智能报告生成</h3>
-                    <p>自动分析工作数据，生成可视化日报/周报</p>
-                    <div class="tech-tags">
-                        <span>NLP处理</span>
-                        <span>数据可视化</span>
-                    </div>
-                </div>
-
-                <div class="feature-card" data-aos="zoom-in">
-                    <div class="feature-icon pulse">
-                        <i class="ri-cloud-line"></i>
-                    </div>
-                    <h3>云端同步</h3>
-                    <p>多端实时同步，支持离线工作模式</p>
-                    <div class="tech-tags">
-                        <span>分布式存储</span>
-                        <span>端到端加密</span>
-                    </div>
-                </div>
-
-                <div class="feature-card" data-aos="zoom-in">
-                    <div class="feature-icon pulse">
-                        <i class="ri-team-line"></i>
-                    </div>
-                    <h3>团队协作</h3>
-                    <p>实时任务分配与进度跟踪</p>
-                    <div class="tech-tags">
-                        <span>协同编辑</span>
-                        <span>权限管理</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="download" class="section">
-            <h2 class="section-title">下载安装</h2>
-            <div class="download-platforms">
-                <div class="platform-card windows">
-                    <div class="platform-icon">
-                        <i class="ri-windows-fill"></i>
-                    </div>
-                    <h3>Windows</h3>
-                    <div class="version-selector">
-                        <button data-version="x64" class="btn-download">
-                            <i class="ri-download-line"></i>
-                            64位安装包
-                        </button>
-                    </div>
-                </div>
-                <div class="platform-card macos">
-                    <div class="platform-badge">M1/M2 优化</div>
-                    <div class="platform-icon">
-                        <i class="ri-apple-fill"></i>
-                    </div>
-                    <div class="spec-list">
-                        <div class="spec-item">
-                            <i class="ri-chip-line"></i>
-                            Apple Silicon 原生支持
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="about" class="section">
-            <h2 class="section-title">关于我们</h2>
-            <div class="team-grid">
-                <div class="team-member">
-                    <div class="member-photo">
-                        <img src="/preview/member1.jpg" alt="技术总监">
-                        <div class="social-links">
-                            <a href="#"><i class="ri-github-fill"></i></a>
-                        </div>
-                    </div>
-                    <h3>张伟</h3>
-                    <p>首席技术官</p>
-                </div>
-                <!-- 更多团队成员 -->
-            </div>
-            <div class="company-timeline">
-                <div class="timeline-item">
-                    <div class="timeline-year">2020</div>
-                    <div class="timeline-content">
-                        <h4>公司成立</h4>
-                        <p>在上海设立研发中心，专注AI办公自动化</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 用户评价 -->
-        <section class="testimonials">
-            <h2 class="section-title">用户评价</h2>
-            <div class="testimonial-carousel">
-                <div class="testimonial-card">
-                    <div class="user-avatar"></div>
-                    <blockquote>
-                        "使用WorkGen后，每周节省至少10小时文书工作时间"
-                    </blockquote>
-                    <div class="user-info">
-                        <h4>张伟</h4>
-                        <p>某科技公司CTO</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 添加图片画廊部分 -->
-        <section class="image-gallery">
-            <h2 class="section-title">功能预览</h2>
-            <div class="gallery-grid">
-                <img src="./assets/images/preview/report-list.jpg" 
-                     alt="日报列表" 
-                     loading="lazy"
-                     onerror="this.onerror=null;this.src='./assets/images/fallback.png'">
-                <img src="./assets/images/preview/smart-todo.jpg" 
-                     alt="智能待办" 
-                     loading="lazy"
-                     onerror="this.src='./assets/images/fallback.png'">
-                <img src="./assets/images/preview/statistics.jpg" 
-                     alt="数据统计" 
-                     loading="lazy"
-                     onerror="this.src='./assets/images/fallback.png'">
-                <img src="./assets/images/preview/automation-report-generation.jpg" 
-                     alt="日报生成" 
-                     loading="lazy"
-                     onerror="this.src='./assets/images/fallback.png'">
-            </div>
-        </section>
+            </section>
+        </div>
     </main>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
@@ -769,92 +806,4 @@
     });
     </script>
 </body>
-</html>
-
-<style>
-.feature-grid {
-  display: grid;
-  gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-}
-
-.feature-card {
-  background: var(--glass-effect);
-  padding: 2rem;
-  border-radius: 16px;
-  transition: transform 0.3s ease;
-}
-
-.feature-card:hover {
-  transform: translateY(-5px);
-}
-
-.feature-icon {
-  width: 60px;
-  height: 60px;
-  background: var(--primary-gradient);
-  border-radius: 12px;
-  display: grid;
-  place-items: center;
-  margin-bottom: 1rem;
-}
-
-.download-platforms {
-  display: grid;
-  gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-}
-
-.platform-card {
-  background: rgba(255,255,255,0.1);
-  padding: 2rem;
-  border-radius: 16px;
-  backdrop-filter: blur(10px);
-}
-
-.version-selector button {
-  display: block;
-  width: 100%;
-  margin: 0.5rem 0;
-}
-
-.team-grid {
-  display: grid;
-  gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-}
-
-.team-member {
-  text-align: center;
-  padding: 1.5rem;
-  background: rgba(255,255,255,0.05);
-  border-radius: 12px;
-}
-
-.member-photo {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  overflow: hidden;
-  margin: 0 auto 1rem;
-}
-
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    padding: 2rem;
-}
-
-.gallery-grid img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 8px;
-    transition: transform 0.3s ease;
-}
-
-.gallery-grid img:hover {
-    transform: scale(1.05);
-}
-</style> 
+</html> 

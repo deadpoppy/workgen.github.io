@@ -1,0 +1,19 @@
+{
+  "hero": {
+    "title": "探索数字创意",
+    "subtitle": "打造卓越视觉体验",
+    "cta": "查看案例"
+  },
+  "features": [
+    {
+      "title": "响应式设计",
+      "icon": "responsive",
+      "description": "全设备完美适配方案"
+    },
+    {
+      "title": "性能优化", 
+      "icon": "performance",
+      "description": "极速加载体验"
+    }
+  ]
+} 

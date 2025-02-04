@@ -45,4 +45,24 @@ img[data-loaded] {
 .image-caption {
   @apply absolute bottom-0 left-0 right-0 bg-black/60 text-white p-4 
          opacity-0 transition-all duration-300 transform translate-y-full;
+}
+
+@layer base {
+  :root {
+    --primary-color: #3182ce;
+    --secondary-color: #63b3ed;
+    --accent-color: #f6ad55;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  .gallery-item {
+    @apply transition-transform duration-300 ease-in-out transform hover:scale-105;
+  }
+
+  .prose img {
+    @apply rounded-lg shadow-lg;
+  }
 } 

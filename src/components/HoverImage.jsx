@@ -1,35 +1,61 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import useImageLoader from '../hooks/useImageLoader';
 
-export default function HoverImage({ src, alt }) {
+export default function HoverImage({ src, alt, link, mode = 'scale' }) {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [hasError, setHasError] = useState(false);
+  const imgRef = useRef();
   const [isHovered, setIsHovered] = useState(false);
-  useImageLoader(src);
-  
+
+  // 添加交叉观察器实现懒加载
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !isLoaded) {
+          const img = new Image();
+          img.src = src;
+          img.onload = () => {
+            setIsLoaded(true);
+            if (imgRef.current) imgRef.current.src = src;
+          };
+          img.onerror = () => {
+            setHasError(true);
+          };
+        }
+      });
+    });
+
+    if (imgRef.current) observer.observe(imgRef.current);
+    return () => observer.disconnect();
+  }, [src]);
+
+  const transitionStyles = {
+    scale: `transform ${isHovered ? 'scale-105' : 'scale-100'}`,
+    parallax: 'transform hover:translate-x-2 hover:-translate-y-2',
+    overlay: 'relative after:absolute after:inset-0 after:bg-black/50'
+  }[mode];
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
       whileHover={{ scale: 1.03 }}
-      className={`relative overflow-hidden rounded-2xl group hover-image-container ${isHovered ? 'hovered' : ''}`}
+      className={`relative overflow-hidden rounded-2xl group hover-image-container ${isLoaded ? 'loaded' : ''}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <Image
-        src={src}
+      {!isLoaded && !hasError && <div className="loading-spinner" />}
+      <img
+        ref={imgRef}
         alt={alt}
-        width={600}
-        height={400}
-        className="w-full h-64 object-cover"
-        placeholder="blur"
-        blurDataURL="../../assets/images/preview/placeholder.jpg"
-        onError={(e) => {
-          console.error(`图片加载失败: ${src}`);
-          e.target.src = '../../assets/images/fallback.png';
-        }}
+        className={`w-full h-64 object-cover ${isLoaded ? 'loaded' : ''}`}
+        onError={() => setHasError(true)}
+        src={hasError ? '/default-image.jpg' : src}
       />
+      {hasError && <div className="error-fallback">图片加载失败</div>}
       <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       <div className="absolute inset-0 flex items-center justify-center">
         <svg className="animate-spin h-8 w-8 text-indigo-500" viewBox="0 0 24 24">
@@ -38,6 +64,9 @@ export default function HoverImage({ src, alt }) {
         </svg>
       </div>
       <div className="image-caption">{alt}</div>
+      {link && (
+        <a href={link} className="absolute inset-0 z-10 block" aria-label={alt} />
+      )}
     </motion.div>
   );
 } 
