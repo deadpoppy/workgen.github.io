@@ -51,8 +51,8 @@
             min-height: 90vh;
             display: flex;
             align-items: center;
-            background: linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%);
-            backdrop-filter: blur(20px);
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.05) 0%, rgba(124, 58, 237, 0.05) 100%);
+            backdrop-filter: blur(10px);
             padding: 4rem 0;
             flex-direction: column;
             text-align: center;
@@ -85,11 +85,38 @@
             background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
             color: white;
             border: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3);
+        }
+
+        .btn-primary:active {
+            transform: scale(0.95);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            border: none;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: white;
         }
 
         .feature-card {
@@ -99,10 +126,12 @@
             padding: 2rem;
             border-radius: 16px;
             transition: all 0.3s ease;
+            perspective: 1000px;
         }
 
         .feature-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-5px) rotateX(5deg) rotateY(2deg);
+            box-shadow: 0 25px 50px -12px rgba(79, 70, 229, 0.25);
         }
 
         .gallery-grid {
@@ -119,7 +148,22 @@
             border-radius: 12px;
             transition: all 0.3s ease;
             border: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: imageReveal 0.6s ease forwards;
         }
+
+        @keyframes imageReveal {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .gallery-grid img:nth-child(1) { animation-delay: 0.2s; }
+        .gallery-grid img:nth-child(2) { animation-delay: 0.4s; }
+        .gallery-grid img:nth-child(3) { animation-delay: 0.6s; }
+        .gallery-grid img:nth-child(4) { animation-delay: 0.8s; }
 
         .gallery-grid img:hover {
             transform: scale(1.03);
@@ -226,7 +270,7 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            background: linear-gradient(135deg, var(--bg-dark) 0%, #1E293B 100%);
+            background: rgba(15, 23, 42, 0.5);
         }
         
         #particles-js {
@@ -313,6 +357,47 @@
             0% { transform: scale(1); }
             50% { transform: scale(1.1); }
             100% { transform: scale(1); }
+        }
+
+        /* 添加按钮呼吸动画 */
+        @keyframes breath {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .cta-buttons .btn-primary {
+            animation: breath 3s ease-in-out infinite;
+        }
+
+        /* 为下载按钮添加箭头动画 */
+        .btn-download i {
+            transition: transform 0.3s ease;
+        }
+
+        .btn-download:hover i {
+            transform: translateY(3px);
+        }
+
+        /* 在团队照片添加悬停效果 */
+        .member-photo {
+            transition: transform 0.3s ease;
+        }
+
+        .member-photo:hover {
+            transform: scale(1.1) rotate(2deg);
+        }
+
+        /* 添加媒体查询适配移动端 */
+        @media (max-width: 768px) {
+            .gallery-grid img {
+                animation-delay: 0s !important;
+                animation-duration: 0.4s;
+            }
+            
+            .feature-card:hover {
+                transform: none;
+            }
         }
     </style>
 </head>
@@ -605,14 +690,14 @@
         particlesJS('particles-js', {
             particles: {
                 number: {
-                    value: 100,
+                    value: 50,
                     density: {
                         enable: true,
                         value_area: 800
                     }
                 },
                 color: {
-                    value: ['#4F46E5', '#7C3AED', '#2563EB']  // 使用主题相关的颜色
+                    value: ['rgba(79, 70, 229, 0.3)', 'rgba(124, 58, 237, 0.3)']
                 },
                 shape: {
                     type: "circle"
@@ -641,7 +726,7 @@
                     enable: true,
                     distance: 150,
                     color: "#4F46E5",
-                    opacity: 0.4,
+                    opacity: 0.2,
                     width: 1
                 },
                 move: {
