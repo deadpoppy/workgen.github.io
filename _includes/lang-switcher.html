@@ -1,8 +1,0 @@
-<div class="lang-switcher">
-  {% for lang in site.languages %}
-    <a href="{% if lang == site.default_lang %}/{% else %}/{{ lang }}/{% endif %}" 
-       class="{% if lang == site.active_lang %}active{% endif %}">
-      {{ lang | upcase }}
-    </a>
-  {% endfor %}
-</div> 

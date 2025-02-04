@@ -2,808 +2,469 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WorkGen - AI智能工作助手</title>
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/layout.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-    <meta http-equiv="Content-Security-Policy" 
-          content="default-src 'self'; 
-                   img-src 'self' data: https: http:;
-                   script-src 'self' 'unsafe-inline' https: http:;
-                   style-src 'self' 'unsafe-inline' https: http:;
-                   font-src 'self' https: data:;">
-    <script>
-    window.addEventListener('load', function() {
-        const images = document.querySelectorAll('img');
-        images.forEach(img => {
-            if (!img.complete || img.naturalHeight === 0) {
-                img.src = 'images/fallback.png';
-            }
-        });
-    });
-    </script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #4F46E5;
-            --gradient-start: #4F46E5;
-            --gradient-end: #7C3AED;
-            --bg-dark: #0F172A;
-            --text-light: #F8FAFC;
-            --card-bg: rgba(255, 255, 255, 0.05);
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--bg-dark);
-            color: var(--text-light);
-            line-height: 1.6;
-        }
-
-        .hero {
-            min-height: 90vh;
-            display: flex;
-            align-items: center;
-            background: linear-gradient(135deg, rgba(79, 70, 229, 0.05) 0%, rgba(124, 58, 237, 0.05) 100%);
-            backdrop-filter: blur(10px);
-            padding: 4rem 0;
-            flex-direction: column;
-            text-align: center;
-        }
-
-        .hero-content {
-            margin-right: 0;
-            margin-bottom: 3rem;
-            max-width: 100%;
-        }
-
-        .gradient-text {
-            background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            font-size: 4rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .btn {
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-            color: white;
-            border: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3);
-        }
-
-        .btn-primary:active {
-            transform: scale(0.95);
-        }
-
-        .btn-secondary {
-            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-            color: white;
-            border: none;
-        }
-
-        .btn-secondary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3);
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 1px solid var(--primary-color);
-            color: var(--primary-color);
-        }
-
-        .btn-outline:hover {
-            background: var(--primary-color);
-            color: white;
-        }
-
-        .feature-card {
-            background: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 2rem;
-            border-radius: 16px;
-            transition: all 0.3s ease;
-            perspective: 1000px;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px) rotateX(5deg) rotateY(2deg);
-            box-shadow: 0 25px 50px -12px rgba(79, 70, 229, 0.25);
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            padding: 4rem 2rem;
-        }
-
-        .gallery-grid img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            opacity: 0;
-            transform: translateY(20px);
-            animation: imageReveal 0.6s ease forwards;
-        }
-
-        @keyframes imageReveal {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .gallery-grid img:nth-child(1) { animation-delay: 0.2s; }
-        .gallery-grid img:nth-child(2) { animation-delay: 0.4s; }
-        .gallery-grid img:nth-child(3) { animation-delay: 0.6s; }
-        .gallery-grid img:nth-child(4) { animation-delay: 0.8s; }
-
-        .gallery-grid img:hover {
-            transform: scale(1.03);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .floating-dashboard {
-            position: relative;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
-        }
-
-        .testimonial-card {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            margin: 2rem 0;
-        }
-
-        .testimonial-card blockquote {
-            font-size: 1.2rem;
-            font-style: italic;
-            margin: 1rem 0;
-        }
-
-        nav {
-            backdrop-filter: blur(10px);
-            background: rgba(15, 23, 42, 0.8);
-            padding: 1rem 2rem;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .nav-links a {
-            color: var(--text-light);
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-color);
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-        
-        .logo img {
-            height: 40px;
-            width: auto;
-            margin-right: 1rem;
-        }
-        
-        /* 添加浮动动画效果 */
-        .floating {
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-5px);
-            }
-            100% {
-                transform: translateY(0px);
-            }
-        }
-        
-        /* 导航栏布局优化 */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem 2rem;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        /* 粒子背景样式 */
-        .particles-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: rgba(15, 23, 42, 0.5);
-        }
-        
-        #particles-js {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 1;
-            pointer-events: none;
-        }
-        
-        /* 确保内容在粒子上层 */
-        main {
-            position: relative;
-            z-index: 1;
-        }
-
-        @media (min-width: 1024px) {
-            .hero {
-                flex-direction: row;
-                text-align: left;
-                padding: 4rem 2rem;
-            }
-            .hero-content {
-                margin-right: 4rem;
-                max-width: 600px;
-            }
-        }
-
-        .feature-grid {
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            padding: 2rem;
-        }
-
-        .feature-card {
-            min-height: 300px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        /* 新增样式 */
-        .tech-tags {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-            margin-top: 1rem;
-        }
-
-        .tech-tags span {
-            background: rgba(79, 70, 229, 0.2);
-            color: #818cf8;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.875rem;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            position: relative;
-            padding-bottom: 1rem;
-        }
-
-        .section-title::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
-        }
-
-        .feature-icon.pulse {
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-
-        /* 添加按钮呼吸动画 */
-        @keyframes breath {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        .cta-buttons .btn-primary {
-            animation: breath 3s ease-in-out infinite;
-        }
-
-        /* 为下载按钮添加箭头动画 */
-        .btn-download i {
-            transition: transform 0.3s ease;
-        }
-
-        .btn-download:hover i {
-            transform: translateY(3px);
-        }
-
-        /* 在团队照片添加悬停效果 */
-        .member-photo {
-            transition: transform 0.3s ease;
-        }
-
-        .member-photo:hover {
-            transform: scale(1.1) rotate(2deg);
-        }
-
-        /* 添加媒体查询适配移动端 */
-        @media (max-width: 768px) {
-            .gallery-grid img {
-                animation-delay: 0s !important;
-                animation-duration: 0.4s;
-            }
-            
-            .feature-card:hover {
-                transform: none;
-            }
-        }
-
-        /* 添加基础容器样式 */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        /* 修复英雄区布局 */
-        .hero {
-            position: relative;
-            z-index: 2;
-            min-height: auto; /* 改为自动高度 */
-            padding: 8rem 0 4rem; /* 增加顶部间距避开导航栏 */
-        }
-
-        /* 调整粒子容器层级 */
-        #particles-js {
-            z-index: 1; /* 原为-1 */
-        }
-
-        /* 修复特征卡片布局 */
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            padding: 2rem 0;
-        }
-
-        /* 添加图片加载保障 */
-        .dashboard-preview {
-            min-height: 400px;
-            background: var(--card-bg);
-            border-radius: 16px;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Workgen 应用集成平台</title>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <div class="particles-bg" id="particles-js"></div>
-    
-    <header class="animate__animated animate__fadeIn">
-        <nav aria-label="主导航">
-            <div class="logo">
-                <img src="/assets/images/logo.svg"
-                     alt="WorkGen Logo"
-                     class="floating"
-                     loading="lazy"
-                     onerror="this.src='/assets/images/logo-fallback.png'"
-                     width="40"
-                     height="40">
-                <span class="logo-text">WorkGen</span>
+    <!-- 在body开始处添加背景容器 -->
+    <div class="dynamic-bg"></div>
+    <header>
+        <nav>
+            <img src="./assets/images/logo.png" alt="Workgen Logo" class="logo">
+            <span class="brand-title">WorkGen</span>
+            <div class="nav-links">
+                <a href="#features">核心功能</a>
+                <a href="#overview">平台概览</a>
+                <a href="#download">下载</a>
+                <a href="#testimonials">用户见证</a>
             </div>
-            <ul class="nav-links" role="menubar">
-                <li role="none">
-                    <a href="#features" role="menuitem">功能</a>
-                </li>
-                <li role="none">
-                    <a href="#download" role="menuitem">下载</a>
-                </li>
-                <li role="none">
-                    <a href="#about" role="menuitem">关于</a>
-                </li>
-            </ul>
+            <div class="mobile-menu">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                </svg>
+            </div>
         </nav>
     </header>
 
-    <main>
-        <div class="container">
-            <section class="hero">
-                <div class="hero-content animate__animated animate__fadeInUp">
-                    <h1 class="gradient-text">WorkGen</h1>
-                    <h2>智能任务管理 × AI自动生成报告</h2>
-                    <p class="typewriter">通过AI技术自动分析任务记录，智能生成日报/周报，提升工作效率300%</p>
-                    
-                    <div class="cta-buttons">
-                        <a href="#" 
-                           class="btn btn-primary" 
-                           data-download="windows"
-                           onclick="event.preventDefault()">
-                            下载Windows版
-                        </a>
-                        <a href="#" 
-                           class="btn btn-secondary" 
-                           data-download="macos"
-                           onclick="event.preventDefault()">
-                            下载macOS版
-                        </a>
-                        <a href="#" class="btn btn-outline">
-                            在线体验
-                        </a>
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>重新定义应用集成方式</h1>
+                <p class="hero-subtitle">基于AI的智能集成平台，助力企业数字化转型</p>
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-number">3000+</div>
+                        <div class="stat-label">企业用户</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">95%+</div>
+                        <div class="stat-label">部署效率提升</div>
                     </div>
                 </div>
-                
-                <div class="hero-image animate__animated animate__fadeInRight">
-                    <div class="floating-dashboard">
-                        <img src="dashboard.png" 
-                             alt="WorkGen 仪表盘界面"
-                             class="dashboard-preview"
-                             loading="lazy"
-                             data-fallback="./assets/images/fallback.png"
-                             onerror="this.onerror=null;this.src=this.dataset.fallback">
+            </div>
+            <div class="cta-buttons">
+                <a href="#download" class="primary-btn">免费试用</a>
+                <a href="#features" class="secondary-btn">查看功能</a>
+            </div>
+        </div>
+        <div class="dashboard-container">
+            <img src="assets/images/dashboard.png" alt="数据看板" class="dashboard-image">
+        </div>
+    </section>
+
+    <section id="features" class="section features">
+        <h2 class="section-title">✨ 核心优势</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-content">
+                    <div class="decorative-line"></div>
+                    <h3>智能报告生成</h3>
+                    <p>基于深度学习的智能分析引擎，自动生成多维度业务报告<br>
+                    • 支持10+数据源接入<br>
+                    • 自定义模板功能<br>
+                    • 实时数据更新</p>
+                </div>
+                <div class="icon-wrapper">
+                    <img src="assets/preview/automation-report-generation.jpg" 
+                         class="feature-icon"
+                         alt="智能报告生成">
+                </div>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-content">
+                    <div class="decorative-line"></div>
+                    <h3>智能任务管理</h3>
+                    <p>AI驱动的智能任务分配系统<br>实时进度追踪与自动提醒</p>
+                </div>
+                <div class="icon-wrapper">
+                    <img src="assets/preview/smart-todo.jpg" 
+                         alt="智能任务管理" 
+                         class="feature-icon"
+                         loading="lazy"
+                         width="240"
+                         height="240">
+                </div>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-content">
+                    <div class="decorative-line"></div>
+                    <h3>数据分析看板</h3>
+                    <p>多维度数据可视化分析<br>实时更新与自定义报表</p>
+                </div>
+                <div class="icon-wrapper">
+                    <img src="assets/preview/statistics.jpg" 
+                         alt="数据分析看板" 
+                         class="feature-icon"
+                         loading="lazy"
+                         width="240"
+                         height="240">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="overview" class="section overview">
+        <h2 class="section-title">📊 平台概览</h2>
+        <div class="platform-overview">
+            <div class="image-wrapper">
+                <img src="assets/preview/ai_summary.jpg" alt="AI 总结" 
+                     class="overview-image hover-zoom"
+                     loading="lazy">
+                <div class="image-caption">智能分析界面</div>
+            </div>
+            <div class="image-wrapper">
+                <img src="assets/preview/report-list.jpg" alt="报告列表" 
+                     class="overview-image hover-zoom"
+                     loading="lazy">
+                <div class="image-caption">报告管理界面</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="download" class="section download">
+        <h2 class="section-title">📦 下载体验</h2>
+        <div class="download-grid">
+            <!-- Windows -->
+            <div class="download-card">
+                <h3>Windows</h3>
+                <p class="version-info">10/11 64位系统</p>
+                <a href="#" class="download-btn">
+                    EXE安装包 (1.2GB)
+                </a>
+            </div>
+
+            <!-- macOS Intel -->
+            <div class="download-card">
+                <h3>macOS Intel</h3>
+                <p class="version-info">x86架构芯片</p>
+                <a href="#" class="download-btn">
+                    DMG安装包 (1.1GB)
+                </a>
+            </div>
+
+            <!-- macOS M系列 -->
+            <div class="download-card">
+                <h3>macOS M系列</h3>
+                <p class="version-info">Apple Silicon芯片</p>
+                <a href="#" class="download-btn">
+                    ARM版 (980MB)
+                </a>
+            </div>
+
+            <!-- 微信小程序 -->
+            <div class="download-card weapp">
+                <h3>微信小程序</h3>
+                <div class="weapp-options">
+                    <a href="weixin://dl/business/?t=xxxxxx" 
+                       class="download-btn wechat-btn">
+                        立即打开
+                    </a>
+                    <span class="tip-text">扫码体验</span>
+                    <div class="qrcode">
+                        <img src="assets/images/weapp-qrcode.jpg" 
+                             alt="小程序二维码">
                     </div>
                 </div>
-            </section>
+            </div>
+        </div>
+    </section>
 
-            <section class="features">
-                <div class="feature-grid">
-                    <!-- 核心优势 -->
-                    <div class="feature-card" data-aos="fade-up">
-                        <div class="feature-icon">
-                            <i class="ri-artificial-intelligence-line"></i>
-                        </div>
-                        <h3>智能工作流引擎</h3>
-                        <p>基于深度学习的任务优先级排序，自动优化工作流程</p>
-                        <ul class="feature-list">
-                            <li>智能日报生成</li>
-                            <li>会议纪要自动整理</li>
-                            <li>项目进度预测</li>
-                        </ul>
-                    </div>
-
-                    <!-- 技术架构 -->
-                    <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
-                        <div class="feature-icon">
-                            <i class="ri-cloud-line"></i>
-                        </div>
-                        <h3>混合云架构</h3>
-                        <p>安全可靠的分布式系统设计</p>
-                        <div class="architecture-diagram">
-                            <div class="layer">AI处理层</div>
-                            <div class="layer">分布式存储</div>
-                            <div class="layer">安全加密</div>
-                        </div>
-                    </div>
-
-                    <!-- 添加更多预览图片 -->
-                    <div class="feature-card" data-aos="fade-up">
-                        <div class="feature-icon">
-                            <i class="ri-artificial-intelligence-line"></i>
-                        </div>
-                        <h3>智能报告生成</h3>
-                        <p>自动生成可视化工作报告</p>
-                        <img src="/preview/AI周报总结.jpg" alt="周报示例" class="feature-preview">
-                    </div>
-                </div>
-            </section>
-
-            <section id="features" class="section">
-                <h2 class="section-title">核心功能</h2>
-                <div class="feature-grid">
-                    <div class="feature-card" data-aos="zoom-in">
-                        <div class="feature-icon pulse">
-                            <i class="ri-cpu-line"></i>
-                        </div>
-                        <h3>智能任务编排</h3>
-                        <p>基于AI的任务优先级自动排序，动态调整工作流程</p>
-                        <div class="tech-tags">
-                            <span>机器学习</span>
-                            <span>自然语言处理</span>
-                        </div>
-                    </div>
-
-                    <div class="feature-card" data-aos="zoom-in">
-                        <div class="feature-icon pulse">
-                            <i class="ri-file-chart-line"></i>
-                        </div>
-                        <h3>智能报告生成</h3>
-                        <p>自动分析工作数据，生成可视化日报/周报</p>
-                        <div class="tech-tags">
-                            <span>NLP处理</span>
-                            <span>数据可视化</span>
-                        </div>
-                    </div>
-
-                    <div class="feature-card" data-aos="zoom-in">
-                        <div class="feature-icon pulse">
-                            <i class="ri-cloud-line"></i>
-                        </div>
-                        <h3>云端同步</h3>
-                        <p>多端实时同步，支持离线工作模式</p>
-                        <div class="tech-tags">
-                            <span>分布式存储</span>
-                            <span>端到端加密</span>
-                        </div>
-                    </div>
-
-                    <div class="feature-card" data-aos="zoom-in">
-                        <div class="feature-icon pulse">
-                            <i class="ri-team-line"></i>
-                        </div>
-                        <h3>团队协作</h3>
-                        <p>实时任务分配与进度跟踪</p>
-                        <div class="tech-tags">
-                            <span>协同编辑</span>
-                            <span>权限管理</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="download" class="section">
-                <h2 class="section-title">下载安装</h2>
-                <div class="download-platforms">
-                    <div class="platform-card windows">
-                        <div class="platform-icon">
-                            <i class="ri-windows-fill"></i>
-                        </div>
-                        <h3>Windows</h3>
-                        <div class="version-selector">
-                            <button data-version="x64" class="btn-download">
-                                <i class="ri-download-line"></i>
-                                64位安装包
-                            </button>
-                        </div>
-                    </div>
-                    <div class="platform-card macos">
-                        <div class="platform-badge">M1/M2 优化</div>
-                        <div class="platform-icon">
-                            <i class="ri-apple-fill"></i>
-                        </div>
-                        <div class="spec-list">
-                            <div class="spec-item">
-                                <i class="ri-chip-line"></i>
-                                Apple Silicon 原生支持
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="about" class="section">
-                <h2 class="section-title">关于我们</h2>
-                <div class="team-grid">
-                    <div class="team-member">
-                        <div class="member-photo">
-                            <img src="/preview/member1.jpg" alt="技术总监">
-                            <div class="social-links">
-                                <a href="#"><i class="ri-github-fill"></i></a>
-                            </div>
-                        </div>
-                        <h3>张伟</h3>
-                        <p>首席技术官</p>
-                    </div>
-                    <!-- 更多团队成员 -->
-                </div>
-                <div class="company-timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-year">2020</div>
-                        <div class="timeline-content">
-                            <h4>公司成立</h4>
-                            <p>在上海设立研发中心，专注AI办公自动化</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 用户评价 -->
-            <section class="testimonials">
-                <h2 class="section-title">用户评价</h2>
-                <div class="testimonial-carousel">
-                    <div class="testimonial-card">
-                        <div class="user-avatar"></div>
-                        <blockquote>
-                            "使用WorkGen后，每周节省至少10小时文书工作时间"
-                        </blockquote>
+    <section id="testimonials" class="section testimonials">
+        <h2 class="section-title">📌 用户见证</h2>
+        <div class="testimonial-carousel">
+            <div class="testimonial-track">
+                <!-- 第一组卡片 -->
+                <div class="testimonial-card">
+                    <div class="user-profile">
+                        <div class="css-avatar" style="--bg-color: #2A6FFF;">张</div>
                         <div class="user-info">
                             <h4>张伟</h4>
-                            <p>某科技公司CTO</p>
+                            <p>CTO @ TechInnovate</p>
                         </div>
                     </div>
+                    <div class="testimonial-content">
+                        <p>"部署效率提升了300%，原本需要3天的集成工作现在2小时完成！"</p>
+                        <div class="rating">★★★★★</div>
+                    </div>
                 </div>
-            </section>
 
-            <!-- 添加图片画廊部分 -->
-            <section class="image-gallery">
-                <h2 class="section-title">功能预览</h2>
-                <div class="gallery-grid">
-                    <img src="./assets/images/preview/report-list.jpg" 
-                         alt="日报列表" 
-                         loading="lazy"
-                         onerror="this.onerror=null;this.src='./assets/images/fallback.png'">
-                    <img src="./assets/images/preview/smart-todo.jpg" 
-                         alt="智能待办" 
-                         loading="lazy"
-                         onerror="this.src='./assets/images/fallback.png'">
-                    <img src="./assets/images/preview/statistics.jpg" 
-                         alt="数据统计" 
-                         loading="lazy"
-                         onerror="this.src='./assets/images/fallback.png'">
-                    <img src="./assets/images/preview/automation-report-generation.jpg" 
-                         alt="日报生成" 
-                         loading="lazy"
-                         onerror="this.src='./assets/images/fallback.png'">
+                <div class="testimonial-card">
+                    <div class="user-profile">
+                        <div class="css-avatar" style="--bg-color: #00C4A9;">李</div>
+                        <div class="user-info">
+                            <h4>李娜</h4>
+                            <p>产品总监 @ FutureTech</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-content">
+                        <p>"智能报告功能让我们的决策速度提升了50%，真正实现了数据驱动！"</p>
+                        <div class="rating">★★★★☆</div>
+                    </div>
                 </div>
-            </section>
+
+                <!-- 卡片3 -->
+                <div class="testimonial-card">
+                    <div class="user-profile">
+                        <div class="css-avatar" style="--bg-color: #4CAF50;">王</div>
+                        <div class="user-info">
+                            <h4>王强</h4>
+                            <p>运维总监 @ CloudNet</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-content">
+                        <p>"API集成效率提升惊人，维护成本降低60%！"</p>
+                        <div class="rating">★★★★★</div>
+                    </div>
+                </div>
+
+                <!-- 卡片4 -->
+                <div class="testimonial-card">
+                    <div class="user-profile">
+                        <div class="css-avatar" style="--bg-color: #9C27B0;">陈</div>
+                        <div class="user-info">
+                            <h4>陈雪</h4>
+                            <p>CEO @ 智慧科技</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-content">
+                        <p>"客户满意度提升35%，真正的一站式解决方案！"</p>
+                        <div class="rating">★★★★★</div>
+                    </div>
+                </div>
+
+                <!-- 卡片5 -->
+                <div class="testimonial-card">
+                    <div class="user-profile">
+                        <div class="css-avatar" style="--bg-color: #2196F3;">张</div>
+                        <div class="user-info">
+                            <h4>张丽</h4>
+                            <p>产品经理 @ 创新工场</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-content">
+                        <p>"可视化配置让非技术人员也能轻松上手！"</p>
+                        <div class="rating">★★★★☆</div>
+                    </div>
+                </div>
+
+                <!-- 卡片6 -->
+                <div class="testimonial-card">
+                    <div class="user-profile">
+                        <div class="css-avatar" style="--bg-color: #FF9800;">李</div>
+                        <div class="user-info">
+                            <h4>李明</h4>
+                            <p>技术主管 @ 未来云</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-content">
+                        <p>"安全性能超出预期，通过等保三级毫无压力！"</p>
+                        <div class="rating">★★★★★</div>
+                    </div>
+                </div>
+
+                <!-- 卡片7 -->
+                <div class="testimonial-card">
+                    <div class="user-profile">
+                        <div class="css-avatar" style="--bg-color: #E91E63;">周</div>
+                        <div class="user-info">
+                            <h4>周涛</h4>
+                            <p>技术总监 @ 云创科技</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-content">
+                        <p>"多平台兼容性超出预期，完美对接现有系统！"</p>
+                        <div class="rating">★★★★★</div>
+                    </div>
+                </div>
+
+                <!-- 卡片8 -->
+                <div class="testimonial-card">
+                    <div class="user-profile">
+                        <div class="css-avatar" style="--bg-color: #00BCD4;">吴</div>
+                        <div class="user-info">
+                            <h4>吴敏</h4>
+                            <p>运营总监 @ 智慧物流</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-content">
+                        <p>"自动化流程节省了70%人工操作时间！"</p>
+                        <div class="rating">★★★★★</div>
+                    </div>
+                </div>
+
+                <!-- 卡片9 -->
+                <div class="testimonial-card">
+                    <div class="user-profile">
+                        <div class="css-avatar" style="--bg-color: #8BC34A;">赵</div>
+                        <div class="user-info">
+                            <h4>赵刚</h4>
+                            <p>IT经理 @ 金融科技</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-content">
+                        <p>"安全审计功能完全满足金融级要求！"</p>
+                        <div class="rating">★★★★★</div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </main>
+    </section>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
-    <script src="main.js"></script>
-    <script src="assets/js/downloads.js" onload="console.log('下载脚本加载成功')" 
-            onerror="console.error('下载脚本加载失败')"></script>
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // 验证所有图片加载
-        const images = document.querySelectorAll('img');
-        images.forEach(img => {
-            img.addEventListener('error', function() {
-                console.error(`图片加载失败: ${this.src}`);
-                // 检查是否已经是fallback图片，避免循环
-                if (!this.src.includes('fallback.png')) {
-                    this.src = './assets/images/fallback.png';
-                }
-            });
-            
-            img.addEventListener('load', function() {
-                console.log(`图片加载成功: ${this.src}`);
-            });
-        });
-    });
-    </script>
+    <footer>
+        <div class="tech-stack">
+            <h3 class="tech-title">信任我们的技术基石</h3>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="css-tech-icon aws">
+                        <span>AWS</span>
+                    </div>
+                    <div class="tech-content">
+                        <h4>全球云服务</h4>
+                        <p>Amazon Web Services 认证合作伙伴</p>
+                    </div>
+                </div>
 
-    <!-- 在最后一个<script>标签前添加粒子配置 -->
+                <div class="tech-item">
+                    <div class="css-tech-icon aliyun">
+                        <span>阿里云</span>
+                    </div>
+                    <div class="tech-content">
+                        <h4>安全认证</h4>
+                        <p>通过等保三级认证</p>
+                    </div>
+                </div>
+
+                <div class="tech-item">
+                    <div class="css-tech-icon ssl">
+                        <div class="lock-icon"></div>
+                    </div>
+                    <div class="tech-content">
+                        <h4>数据传输安全</h4>
+                        <p>256位SSL加密通信</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="copyright">© 2024 Workgen. All rights reserved.</p>
+    </footer>
+
+    <style>
+        .image-wrapper {
+            position: relative;
+        }
+        
+        .image-caption {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255,255,255,0.9);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 500;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .icon-wrapper {
+            perspective: 1000px;
+        }
+        
+        .feature-icon {
+            transition: transform 0.4s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: rotateY(15deg) translateZ(10px);
+            box-shadow: 0 15px 30px rgba(42, 111, 255, 0.2);
+        }
+    </style>
+
+    <!-- 添加背景动画脚本 -->
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        particlesJS('particles-js', {
-            particles: {
-                number: {
-                    value: 50,
-                    density: {
-                        enable: true,
-                        value_area: 800
-                    }
-                },
-                color: {
-                    value: ['rgba(79, 70, 229, 0.3)', 'rgba(124, 58, 237, 0.3)']
-                },
-                shape: {
-                    type: "circle"
-                },
-                opacity: {
-                    value: 0.6,
-                    random: true,
-                    animation: {
-                        enable: true,
-                        speed: 1,
-                        opacity_min: 0.1,
-                        sync: false
-                    }
-                },
-                size: {
-                    value: 3,
-                    random: true,
-                    animation: {
-                        enable: true,
-                        speed: 2,
-                        size_min: 0.1,
-                        sync: false
-                    }
-                },
-                line_linked: {
-                    enable: true,
-                    distance: 150,
-                    color: "#4F46E5",
-                    opacity: 0.2,
-                    width: 1
-                },
-                move: {
-                    enable: true,
-                    speed: 2,
-                    direction: "none",
-                    random: false,
-                    straight: false,
-                    out_mode: "out",
-                    bounce: false,
+        class ParticleBackground {
+            constructor() {
+                this.canvas = document.createElement('canvas');
+                document.querySelector('.dynamic-bg').appendChild(this.canvas);
+                this.ctx = this.canvas.getContext('2d');
+                this.particles = [];
+                this.maxParticles = 100;
+                
+                this.resize();
+                window.addEventListener('resize', () => this.resize());
+                
+                this.initParticles();
+                this.animate();
+            }
+
+            resize() {
+                this.width = window.innerWidth;
+                this.height = window.innerHeight;
+                this.canvas.width = this.width;
+                this.canvas.height = this.height;
+            }
+
+            initParticles() {
+                for(let i = 0; i < this.maxParticles; i++) {
+                    this.particles.push({
+                        x: Math.random() * this.width,
+                        y: Math.random() * this.height,
+                        vx: (Math.random() - 0.5) * 0.5,
+                        vy: (Math.random() - 0.5) * 0.5,
+                        radius: Math.random() * 2 + 1,
+                        color: `rgba(255,255,255,${Math.random() * 0.2})`
+                    });
                 }
-            },
-            interactivity: {
-                detect_on: "canvas",
-                events: {
-                    onhover: {
-                        enable: true,
-                        mode: "grab"
-                    },
-                    onclick: {
-                        enable: true,
-                        mode: "push"
-                    },
-                    resize: true
-                },
-                modes: {
-                    grab: {
-                        distance: 140,
-                        line_linked: {
-                            opacity: 1
+            }
+
+            draw() {
+                this.ctx.clearRect(0, 0, this.width, this.height);
+                
+                // 绘制粒子
+                this.particles.forEach(p => {
+                    this.ctx.beginPath();
+                    this.ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    this.ctx.fillStyle = p.color;
+                    this.ctx.fill();
+                    
+                    // 更新位置
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    
+                    // 边界反弹
+                    if(p.x < 0 || p.x > this.width) p.vx *= -1;
+                    if(p.y < 0 || p.y > this.height) p.vy *= -1;
+                });
+
+                // 绘制粒子连线
+                this.particles.forEach((a, i) => {
+                    this.particles.slice(i).forEach(b => {
+                        const dx = a.x - b.x;
+                        const dy = a.y - b.y;
+                        const dist = Math.sqrt(dx*dx + dy*dy);
+                        
+                        if(dist < 100) {
+                            this.ctx.beginPath();
+                            this.ctx.strokeStyle = `rgba(255,255,255,${0.2 - dist/500})`;
+                            this.ctx.lineWidth = 0.5;
+                            this.ctx.moveTo(a.x, a.y);
+                            this.ctx.lineTo(b.x, b.y);
+                            this.ctx.stroke();
                         }
-                    },
-                    push: {
-                        particles_nb: 4
-                    }
-                }
-            },
-            retina_detect: true
-        });
-    });
+                    });
+                });
+            }
+
+            animate() {
+                this.draw();
+                requestAnimationFrame(() => this.animate());
+            }
+        }
+
+        // 初始化背景
+        new ParticleBackground();
     </script>
 </body>
 </html> 
