@@ -53,11 +53,14 @@
             background: linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%);
             backdrop-filter: blur(20px);
             padding: 4rem 0;
+            flex-direction: column;
+            text-align: center;
         }
 
         .hero-content {
-            max-width: 600px;
-            margin-right: 4rem;
+            margin-right: 0;
+            margin-bottom: 3rem;
+            max-width: 100%;
         }
 
         .gradient-text {
@@ -99,7 +102,6 @@
 
         .feature-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
         .gallery-grid {
@@ -241,6 +243,76 @@
             position: relative;
             z-index: 1;
         }
+
+        @media (min-width: 1024px) {
+            .hero {
+                flex-direction: row;
+                text-align: left;
+                padding: 4rem 2rem;
+            }
+            .hero-content {
+                margin-right: 4rem;
+                max-width: 600px;
+            }
+        }
+
+        .feature-grid {
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            padding: 2rem;
+        }
+
+        .feature-card {
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* 新增样式 */
+        .tech-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .tech-tags span {
+            background: rgba(79, 70, 229, 0.2);
+            color: #818cf8;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+        }
+
+        .feature-icon.pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
     </style>
 </head>
 <body>
@@ -292,8 +364,11 @@
             
             <div class="hero-image animate__animated animate__fadeInRight">
                 <div class="floating-dashboard">
-                    <!-- 3D 悬浮的产品界面截图 -->
-                    <img src="dashboard.png" alt="WorkGen Dashboard">
+                    <img src="./assets/images/dashboard.png" 
+                         alt="WorkGen Dashboard"
+                         style="max-width: 600px; width: 100%"
+                         loading="lazy"
+                         onerror="this.onerror=null;this.src='./assets/images/fallback.png'">
                 </div>
             </div>
         </section>
@@ -354,7 +429,42 @@
                         <span>自然语言处理</span>
                     </div>
                 </div>
-                <!-- 更多功能卡片 -->
+
+                <div class="feature-card" data-aos="zoom-in">
+                    <div class="feature-icon pulse">
+                        <i class="ri-file-chart-line"></i>
+                    </div>
+                    <h3>智能报告生成</h3>
+                    <p>自动分析工作数据，生成可视化日报/周报</p>
+                    <div class="tech-tags">
+                        <span>NLP处理</span>
+                        <span>数据可视化</span>
+                    </div>
+                </div>
+
+                <div class="feature-card" data-aos="zoom-in">
+                    <div class="feature-icon pulse">
+                        <i class="ri-cloud-line"></i>
+                    </div>
+                    <h3>云端同步</h3>
+                    <p>多端实时同步，支持离线工作模式</p>
+                    <div class="tech-tags">
+                        <span>分布式存储</span>
+                        <span>端到端加密</span>
+                    </div>
+                </div>
+
+                <div class="feature-card" data-aos="zoom-in">
+                    <div class="feature-icon pulse">
+                        <i class="ri-team-line"></i>
+                    </div>
+                    <h3>团队协作</h3>
+                    <p>实时任务分配与进度跟踪</p>
+                    <div class="tech-tags">
+                        <span>协同编辑</span>
+                        <span>权限管理</span>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -438,7 +548,7 @@
                 <img src="./assets/images/preview/report-list.jpg" 
                      alt="日报列表" 
                      loading="lazy"
-                     onerror="this.src='./assets/images/fallback.png'">
+                     onerror="this.onerror=null;this.src='./assets/images/fallback.png'">
                 <img src="./assets/images/preview/smart-todo.jpg" 
                      alt="智能待办" 
                      loading="lazy"
