@@ -6,15 +6,15 @@
 
 <div class="hero-section">
   <div class="hero-content">
-    <h1>重新定义应用集成方式</h1>
+    <h1>重新定义个人工作方式</h1>
     <div class="stats">
       <div class="stat-item">
         <div class="stat-number">3000+</div>
-        <div class="stat-label">企业用户</div>
+        <div class="stat-label">个人用户</div>
       </div>
       <div class="stat-item">
         <div class="stat-number">95%</div>
-        <div class="stat-label">部署效率提升</div>
+        <div class="stat-label">汇报效率提升</div>
       </div>
     </div>
     <div class="cta-buttons">
@@ -74,7 +74,7 @@
   <div class="testimonial-card">
     <img src="assets/client-bank.png" alt="银行客户" class="client-logo">
     <blockquote>
-      "集成效率提升3倍，运维成本降低60%"
+      "工作效率提升3倍，汇报成本降低60%"
     </blockquote>
     <div class="client-info">
       <div class="client-name">XX商业银行</div>
@@ -84,7 +84,7 @@
   <div class="testimonial-card">
     <img src="assets/client-ecommerce.png" alt="电商客户" class="client-logo">
     <blockquote>
-      "最佳的中型企业应用集成方案"
+      "最佳的代办事项方案"
     </blockquote>
     <div class="client-info">
       <div class="client-name">YY跨境电商</div>
